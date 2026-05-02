@@ -1,0 +1,9 @@
+
+{
+  "name": "Cyprus IVF Labs - Premium Fertility Solutions",
+  "description": "A modern, professional web application for Cyprus IVF Labs, featuring multilingual support, service overviews, and an AI-powered fertility assistant.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
