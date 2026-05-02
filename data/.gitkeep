@@ -1,0 +1,2 @@
+# Run: npm run crawl → creates site-inventory.json
+# Run: npm run sitemap → creates sitemap-inventory.md (sitemap.xml goes to public/)
