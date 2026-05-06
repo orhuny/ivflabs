@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.cyprusivflabs.com)",
+      "PowerShell(try { $r = Invoke-WebRequest -UseBasicParsing -Uri \"http://localhost:3000/en/treatments/ivf-treatment\" -TimeoutSec 10; Write-Output \"EN ivf: $\\($r.StatusCode\\)\" } catch { Write-Output \"ERROR: $_\" }; try { $r = Invoke-WebRequest -UseBasicParsing -Uri \"http://localhost:3000/de/treatments/eizellspende\" -TimeoutSec 10; Write-Output \"DE egg: $\\($r.StatusCode\\)\" } catch { Write-Output \"ERROR: $_\" }; try { $r = Invoke-WebRequest -UseBasicParsing -Uri \"http://localhost:3000/tr/treatments\" -TimeoutSec 10; Write-Output \"TR list: $\\($r.StatusCode\\)\" } catch { Write-Output \"ERROR: $_\" })"
+    ]
+  }
+}

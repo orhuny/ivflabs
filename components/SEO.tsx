@@ -4,11 +4,18 @@ import { useLocation } from 'react-router-dom';
 /** Base URL for canonical and OG (no trailing slash). Set via env or default. */
 const SITE_BASE = typeof import.meta !== 'undefined' && (import.meta as { env?: { VITE_SITE_URL?: string } }).env?.VITE_SITE_URL
   ? (import.meta as { env: { VITE_SITE_URL: string } }).env.VITE_SITE_URL
-  : 'https://www.cyprusivflabs.com';
+  : 'https://dogusivf.net';
 
 /** Geçici/staging deploy'da noindex: VITE_NOINDEX=true verirseniz Google geçici siteyi indekslemez. */
 const DEFAULT_NOINDEX = typeof import.meta !== 'undefined' &&
   (import.meta as { env?: { VITE_NOINDEX?: string } }).env?.VITE_NOINDEX === 'true';
+
+export interface SEOAlternate {
+  /** ISO language code (tr, en, de, ru, ar). */
+  lang: string;
+  /** Path on this site, with leading slash (e.g. /tr/treatments/tup-bebek-tedavisi). */
+  path: string;
+}
 
 export interface SEOProps {
   /** Document title (e.g. "Doğuş IVF Center | Tüp Bebek Merkezi") */
@@ -17,7 +24,7 @@ export interface SEOProps {
   description: string;
   /** Optional canonical path (e.g. /en/blog). If not set, uses current pathname. */
   canonicalPath?: string;
-  /** OG/Twitter image URL (absolute). If not set, uses default or none. */
+  /** OG/Twitter image URL (absolute or root-relative). */
   image?: string;
   /** OG type (default: website) */
   ogType?: string;
@@ -25,8 +32,14 @@ export interface SEOProps {
   robotsIndex?: 'index' | 'noindex';
   /** follow | nofollow (default: follow) */
   robotsFollow?: 'follow' | 'nofollow';
-  /** HTML lang (e.g. en, tr). Used for hreflang if we add alternate links. */
+  /** HTML lang (e.g. en, tr). */
   lang?: string;
+  /** Per-language alternate paths. Used to emit hreflang tags + x-default. */
+  alternates?: SEOAlternate[];
+  /** Extra JSON-LD structured-data objects rendered as <script type="application/ld+json">. */
+  jsonLd?: Array<Record<string, unknown>>;
+  /** Comma-separated keywords for the meta keywords tag. */
+  keywords?: string;
 }
 
 const SEO: React.FC<SEOProps> = ({
@@ -38,6 +51,9 @@ const SEO: React.FC<SEOProps> = ({
   robotsIndex = DEFAULT_NOINDEX ? 'noindex' : 'index',
   robotsFollow = 'follow',
   lang,
+  alternates,
+  jsonLd,
+  keywords,
 }) => {
   const location = useLocation();
   const path = canonicalPath ?? location.pathname;
@@ -48,6 +64,7 @@ const SEO: React.FC<SEOProps> = ({
   useEffect(() => {
     if (lang) {
       document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     }
   }, [lang]);
 
@@ -55,8 +72,27 @@ const SEO: React.FC<SEOProps> = ({
     <>
       <title>{title}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
       {robots && <meta name="robots" content={robots} />}
       <link rel="canonical" href={canonical} />
+
+      {/* hreflang alternates for multilingual SEO. */}
+      {alternates?.map((alt) => (
+        <link
+          key={alt.lang}
+          rel="alternate"
+          hrefLang={alt.lang}
+          href={`${SITE_BASE}${alt.path}`}
+        />
+      ))}
+      {alternates && alternates.length > 0 && (
+        <link
+          rel="alternate"
+          hrefLang="x-default"
+          href={`${SITE_BASE}${(alternates.find((a) => a.lang === 'en') ?? alternates[0]).path}`}
+        />
+      )}
+
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
@@ -68,6 +104,15 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+      {/* Structured data (JSON-LD). */}
+      {jsonLd?.map((data, idx) => (
+        <script
+          key={idx}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+        />
+      ))}
     </>
   );
 };

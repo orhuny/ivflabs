@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-sitemap.js && node scripts/prerender.js",
+    "build:fast": "vite build && node scripts/generate-sitemap.js",
     "preview": "vite preview",
     "deploy": "vercel",
     "deploy:prod": "vercel --prod",
     "crawl": "node scripts/crawl-site.js",
-    "sitemap": "node scripts/generate-sitemap.js"
+    "sitemap": "node scripts/generate-sitemap.js",
+    "prerender": "node scripts/prerender.js"
   },
   "dependencies": {
     "@google/genai": "^1.38.0",
@@ -22,6 +24,7 @@
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
     "cheerio": "^1.0.0",
+    "puppeteer": "^24.43.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }

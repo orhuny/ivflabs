@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LocaleLayout from './components/LocaleLayout';
 import Home from './pages/Home';
 import TreatmentsPage from './pages/TreatmentsPage';
+import TreatmentDetailPage from './pages/TreatmentDetailPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         </Route>
         <Route path="/:lang/treatments" element={<LocaleLayout />}>
           <Route index element={<TreatmentsPage />} />
+          <Route path=":slug" element={<TreatmentDetailPage />} />
         </Route>
         <Route path="/:lang/about" element={<LocaleLayout />}>
           <Route index element={<AboutPage />} />

@@ -1,88 +1,161 @@
 /**
- * Generates sitemap.xml and sitemap-inventory.md from data/site-inventory.json
- * Run after: npm run crawl
- * Usage: node scripts/generate-sitemap.js
+ * Generates sitemap.xml + per-language hreflang sitemap and a human-readable
+ * inventory. Pulls treatment data straight from pages/treatments/ so newly
+ * added treatments are picked up automatically.
+ *
+ * Run: node scripts/generate-sitemap.js
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { register } from 'node:module';
+import { pathToFileURL } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_DIR = join(__dirname, '..', 'data');
-const PUBLIC_DIR = join(__dirname, '..', 'public');
-const INVENTORY_PATH = join(DATA_DIR, 'site-inventory.json');
+const ROOT = join(__dirname, '..');
+const PUBLIC_DIR = join(ROOT, 'public');
+const DATA_DIR = join(ROOT, 'data');
 
-const BASE_URL = 'https://www.cyprusivflabs.com';
+const BASE_URL = 'https://dogusivf.net';
+const LANGS = ['tr', 'en', 'de', 'ru', 'ar'];
 
-function main() {
-  let inventory;
-  try {
-    inventory = JSON.parse(readFileSync(INVENTORY_PATH, 'utf8'));
-  } catch (e) {
-    console.error('Run "npm run crawl" first to create data/site-inventory.json');
-    process.exit(1);
-  }
+// Treatments are TS source. We import them indirectly by reading the slug + id
+// from each file using a cheap regex parse — no TS compiler needed at build
+// time. This keeps the sitemap script dependency-free.
+function loadTreatments() {
+  const dir = join(ROOT, 'pages', 'treatments');
+  const indexFile = join(dir, 'index.ts');
+  const indexSrc = readFileSync(indexFile, 'utf8');
+  const importLines = indexSrc.match(/^import\s+\w+\s+from\s+'\.\/([\w-]+)';/gm) || [];
+  const files = importLines
+    .map((l) => l.match(/'\.\/([\w-]+)'/)[1])
+    .map((name) => join(dir, `${name}.ts`));
 
-  const urls = inventory.urls || [];
-  const pages = inventory.pages || {};
-
-  // sitemap.xml
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${escapeXml(u)}</loc><changefreq>weekly</changefreq></url>`).join('\n')}
-</urlset>`;
-  mkdirSync(PUBLIC_DIR, { recursive: true });
-  writeFileSync(join(PUBLIC_DIR, 'sitemap.xml'), xml, 'utf8');
-  console.log('Wrote public/sitemap.xml');
-
-  // sitemap-inventory.md (human-readable)
-  let md = `# Site URL Inventory & Sitemap\n\nGenerated from crawl of ${inventory.baseUrl} at ${inventory.crawledAt}.\n\n`;
-  md += `## URL list (${urls.length} pages)\n\n`;
-  md += '| URL | Title | H1 | Meta description | Index | Lang |\n';
-  md += '|-----|-------|-----|-----------------|-------|------|\n';
-
-  for (const url of urls) {
-    const p = pages[url] || {};
-    const m = p.meta || {};
-    const title = (m.title || '').replace(/\|/g, '\\|').slice(0, 50);
-    const h1 = (m.h1 || '').replace(/\|/g, '\\|').slice(0, 40);
-    const desc = (m.metaDescription || '').replace(/\|/g, '\\|').replace(/\n/g, ' ').slice(0, 60);
-    const robots = m.robotsIndex || '-';
-    const lang = m.inferredLang || '-';
-    md += `| ${url} | ${title} | ${h1} | ${desc} | ${robots} | ${lang} |\n`;
-  }
-
-  md += '\n## Per-URL detail (metadata, headings, images)\n\n';
-  for (const url of urls) {
-    const p = pages[url] || {};
-    const m = p.meta || {};
-    md += `### ${url}\n\n`;
-    md += `- **Title:** ${m.title || '-'}\n`;
-    md += `- **Meta description:** ${m.metaDescription || '-'}\n`;
-    md += `- **H1:** ${m.h1 || '-'}\n`;
-    md += `- **H2:** ${(m.h2 || []).join(' | ') || '-'}\n`;
-    md += `- **H3:** ${(m.h3 || []).join(' | ') || '-'}\n`;
-    md += `- **Canonical:** ${m.canonical || '-'}\n`;
-    md += `- **Robots:** ${m.robotsIndex || 'index'} / ${m.robotsFollow || 'follow'}\n`;
-    md += `- **OG/Twitter:** ${Object.keys(m.openGraph || {}).length ? 'present' : '-'}\n`;
-    md += `- **Lang:** ${m.inferredLang || m.htmlLang || '-'}\n`;
-    md += `- **Images:** ${(p.images || []).length}\n`;
-    if ((p.images || []).length) {
-      p.images.slice(0, 5).forEach((img) => {
-        md += `  - ${img.src} ${img.alt ? `(alt: ${img.alt.slice(0, 40)})` : ''}\n`;
-      });
-      if (p.images.length > 5) md += `  - ... and ${p.images.length - 5} more\n`;
+  const treatments = [];
+  for (const file of files) {
+    const src = readFileSync(file, 'utf8');
+    const idMatch = src.match(/\bid:\s*'([\w-]+)'/);
+    const slugBlock = src.match(/slug:\s*\{([\s\S]*?)\}/);
+    const titleBlock = src.match(/title:\s*\{([\s\S]*?)\},\n\s*seoTitle:/);
+    if (!idMatch || !slugBlock) continue;
+    const slug = {};
+    for (const lang of LANGS) {
+      const m = slugBlock[1].match(new RegExp(`${lang}:\\s*'([^']+)'`));
+      if (m) slug[lang] = m[1];
     }
-    md += '\n';
+    const title = {};
+    if (titleBlock) {
+      for (const lang of LANGS) {
+        const m = titleBlock[1].match(new RegExp(`${lang}:\\s*'([^']+)'`));
+        if (m) title[lang] = m[1];
+      }
+    }
+    treatments.push({ id: idMatch[1], slug, title, file });
   }
+  return treatments;
+}
 
-  writeFileSync(join(DATA_DIR, 'sitemap-inventory.md'), md, 'utf8');
-  console.log('Wrote data/sitemap-inventory.md');
+function buildUrls(treatments) {
+  const urls = [];
+  // Static pages per language
+  const staticPaths = ['', '/treatments', '/about', '/contact', '/blog'];
+  for (const lang of LANGS) {
+    for (const path of staticPaths) {
+      urls.push(`${BASE_URL}/${lang}${path}`);
+    }
+  }
+  // Treatment detail pages per language
+  for (const t of treatments) {
+    for (const lang of LANGS) {
+      const slug = t.slug[lang];
+      if (slug) urls.push(`${BASE_URL}/${lang}/treatments/${slug}`);
+    }
+  }
+  return urls;
+}
+
+function urlElementWithHreflang(url, alternates) {
+  const altLines = alternates
+    .map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" href="${escapeXml(a.url)}"/>`)
+    .join('\n');
+  const xDefault = alternates.find((a) => a.lang === 'en') ?? alternates[0];
+  return `  <url>
+    <loc>${escapeXml(url)}</loc>
+    <changefreq>weekly</changefreq>
+${altLines}
+    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(xDefault.url)}"/>
+  </url>`;
 }
 
 function escapeXml(s) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function main() {
+  const treatments = loadTreatments();
+  const urls = buildUrls(treatments);
+
+  // Build hreflang groups: every treatment URL gets its 5-language alternates.
+  const sections = [];
+  // 1) Static pages, grouped per page across languages
+  const staticPages = ['', '/treatments', '/about', '/contact', '/blog'];
+  for (const path of staticPages) {
+    const alternates = LANGS.map((lang) => ({ lang, url: `${BASE_URL}/${lang}${path}` }));
+    for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates));
+  }
+  // 2) Treatment pages, grouped per treatment across languages
+  for (const t of treatments) {
+    const alternates = LANGS.filter((l) => t.slug[l]).map((lang) => ({
+      lang,
+      url: `${BASE_URL}/${lang}/treatments/${t.slug[lang]}`,
+    }));
+    for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates));
+  }
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${sections.join('\n')}
+</urlset>`;
+
+  mkdirSync(PUBLIC_DIR, { recursive: true });
+  writeFileSync(join(PUBLIC_DIR, 'sitemap.xml'), xml, 'utf8');
+  console.log(`Wrote public/sitemap.xml with ${urls.length} URLs (${treatments.length} treatments × ${LANGS.length} langs + static).`);
+
+  // robots.txt — point search engines at the sitemap.
+  const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${BASE_URL}/sitemap.xml
+`;
+  writeFileSync(join(PUBLIC_DIR, 'robots.txt'), robots, 'utf8');
+  console.log('Wrote public/robots.txt');
+
+  // Human-readable inventory
+  mkdirSync(DATA_DIR, { recursive: true });
+  let md = `# Sitemap Inventory\n\nGenerated ${new Date().toISOString()} — ${urls.length} URLs.\n\n`;
+  md += '## Static pages\n\n';
+  for (const path of staticPages) {
+    md += `- \`${path || '/'}\` — ${LANGS.map((l) => `[${l}](${BASE_URL}/${l}${path})`).join(' · ')}\n`;
+  }
+  md += '\n## Treatment pages\n\n';
+  for (const t of treatments) {
+    md += `### ${t.id}\n`;
+    for (const lang of LANGS) {
+      const slug = t.slug[lang];
+      const title = t.title[lang] || '-';
+      if (slug) md += `- **${lang}** — [${title}](${BASE_URL}/${lang}/treatments/${slug})\n`;
+    }
+    md += '\n';
+  }
+  writeFileSync(join(DATA_DIR, 'sitemap-inventory.md'), md, 'utf8');
+  console.log('Wrote data/sitemap-inventory.md');
 }
 
 main();
