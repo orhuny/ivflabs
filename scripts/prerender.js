@@ -146,6 +146,43 @@ async function main() {
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
       // Give React a moment to commit the SEO tags into <head>.
       await page.waitForFunction(() => document.title && document.title.length > 0, { timeout: 8000 });
+      // React 19's metadata support inserts new <title>/<meta>/<link> nodes
+      // without removing the static ones from index.html. That leaves the
+      // prerendered HTML with two titles, two descriptions, etc. — bad for
+      // SEO. Remove duplicates here, keeping the React-rendered (last) copy.
+      await page.evaluate(() => {
+        const dedupe = (selector, keepKey) => {
+          const els = Array.from(document.querySelectorAll(selector));
+          if (els.length <= 1) return;
+          if (keepKey) {
+            const seen = new Set();
+            for (const el of els.reverse()) {
+              const k = keepKey(el);
+              if (seen.has(k)) el.remove();
+              else seen.add(k);
+            }
+          } else {
+            for (let i = 0; i < els.length - 1; i++) els[i].remove();
+          }
+        };
+        dedupe('head > title');
+        dedupe('head > meta[name="description"]');
+        dedupe('head > meta[name="keywords"]');
+        dedupe('head > meta[name="robots"]');
+        dedupe('head > link[rel="canonical"]');
+        dedupe('head > meta[property="og:title"]');
+        dedupe('head > meta[property="og:description"]');
+        dedupe('head > meta[property="og:url"]');
+        dedupe('head > meta[property="og:type"]');
+        dedupe('head > meta[property="og:image"]');
+        dedupe('head > meta[property="og:locale"]');
+        dedupe('head > meta[name="twitter:card"]');
+        dedupe('head > meta[name="twitter:title"]');
+        dedupe('head > meta[name="twitter:description"]');
+        dedupe('head > meta[name="twitter:image"]');
+        // hreflang: keep one per language code.
+        dedupe('head > link[rel="alternate"][hreflang]', (el) => el.getAttribute('hreflang'));
+      });
       const html = await page.content();
       const outDir = join(DIST_DIR, escapeForFile(route));
       mkdirSync(outDir, { recursive: true });
