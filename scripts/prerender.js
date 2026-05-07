@@ -42,6 +42,24 @@ try {
   process.exit(0);
 }
 
+// Read blog post ids from constants.tsx.
+function loadBlogPosts() {
+  const file = join(ROOT, 'constants.tsx');
+  const src = readFileSync(file, 'utf8');
+  const blogStart = src.indexOf('export const BLOG_POSTS');
+  if (blogStart < 0) return [];
+  const blogSrc = src.slice(blogStart);
+  const matches = [...blogSrc.matchAll(/\bid:\s*'([a-z0-9-]+)'/g)];
+  const seen = new Set();
+  const posts = [];
+  for (const m of matches) {
+    if (seen.has(m[1])) continue;
+    seen.add(m[1]);
+    posts.push({ id: m[1] });
+  }
+  return posts;
+}
+
 // Read treatment slugs the same way generate-sitemap.js does.
 function loadTreatments() {
   const dir = join(ROOT, 'pages', 'treatments');
@@ -64,7 +82,7 @@ function loadTreatments() {
   return treatments;
 }
 
-function buildRoutes(treatments) {
+function buildRoutes(treatments, blogPosts) {
   const staticPaths = ['', '/treatments', '/about', '/contact', '/blog'];
   const routes = [];
   for (const lang of LANGS) {
@@ -73,6 +91,11 @@ function buildRoutes(treatments) {
   for (const t of treatments) {
     for (const lang of LANGS) {
       if (t.slug[lang]) routes.push(`/${lang}/treatments/${t.slug[lang]}`);
+    }
+  }
+  for (const post of blogPosts) {
+    for (const lang of LANGS) {
+      routes.push(`/${lang}/blog/${post.id}`);
     }
   }
   return routes;
@@ -129,7 +152,8 @@ function escapeForFile(p) {
 
 async function main() {
   const treatments = loadTreatments();
-  const routes = buildRoutes(treatments);
+  const blogPosts = loadBlogPosts();
+  const routes = buildRoutes(treatments, blogPosts);
   const server = await startStaticServer();
   console.log(`[prerender] Static server on ${ORIGIN}, prerendering ${routes.length} routes…`);
 

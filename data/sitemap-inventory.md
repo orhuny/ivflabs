@@ -1,6 +1,6 @@
 # Sitemap Inventory
 
-Generated 2026-05-06T13:54:20.333Z — 105 URLs.
+Generated 2026-05-07T09:32:17.119Z — 190 URLs.
 
 ## Static pages
 
@@ -123,4 +123,126 @@ Generated 2026-05-06T13:54:20.333Z — 105 URLs.
 - **de** — [PRP-Behandlung (Eierstock & Gebärmutter)](https://dogusivf.net/de/treatments/prp-eierstock-gebaermutter-behandlung)
 - **ru** — [PRP-терапия (яичники и матка)](https://dogusivf.net/ru/treatments/prp-yaichniki-matka)
 - **ar** — [علاج PRP (للمبيض والرحم)](https://dogusivf.net/ar/treatments/prp-tajdid-mabid-rahem)
+
+
+## Blog posts
+
+### egg-donation-stages
+- **tr** — https://dogusivf.net/tr/blog/egg-donation-stages
+- **en** — https://dogusivf.net/en/blog/egg-donation-stages
+- **de** — https://dogusivf.net/de/blog/egg-donation-stages
+- **ru** — https://dogusivf.net/ru/blog/egg-donation-stages
+- **ar** — https://dogusivf.net/ar/blog/egg-donation-stages
+
+### vacation-baby
+- **tr** — https://dogusivf.net/tr/blog/vacation-baby
+- **en** — https://dogusivf.net/en/blog/vacation-baby
+- **de** — https://dogusivf.net/de/blog/vacation-baby
+- **ru** — https://dogusivf.net/ru/blog/vacation-baby
+- **ar** — https://dogusivf.net/ar/blog/vacation-baby
+
+### accommodation-cyprus
+- **tr** — https://dogusivf.net/tr/blog/accommodation-cyprus
+- **en** — https://dogusivf.net/en/blog/accommodation-cyprus
+- **de** — https://dogusivf.net/de/blog/accommodation-cyprus
+- **ru** — https://dogusivf.net/ru/blog/accommodation-cyprus
+- **ar** — https://dogusivf.net/ar/blog/accommodation-cyprus
+
+### ivf-tests
+- **tr** — https://dogusivf.net/tr/blog/ivf-tests
+- **en** — https://dogusivf.net/en/blog/ivf-tests
+- **de** — https://dogusivf.net/de/blog/ivf-tests
+- **ru** — https://dogusivf.net/ru/blog/ivf-tests
+- **ar** — https://dogusivf.net/ar/blog/ivf-tests
+
+### ivf-restart-cyprus
+- **tr** — https://dogusivf.net/tr/blog/ivf-restart-cyprus
+- **en** — https://dogusivf.net/en/blog/ivf-restart-cyprus
+- **de** — https://dogusivf.net/de/blog/ivf-restart-cyprus
+- **ru** — https://dogusivf.net/ru/blog/ivf-restart-cyprus
+- **ar** — https://dogusivf.net/ar/blog/ivf-restart-cyprus
+
+### menopause-ivf
+- **tr** — https://dogusivf.net/tr/blog/menopause-ivf
+- **en** — https://dogusivf.net/en/blog/menopause-ivf
+- **de** — https://dogusivf.net/de/blog/menopause-ivf
+- **ru** — https://dogusivf.net/ru/blog/menopause-ivf
+- **ar** — https://dogusivf.net/ar/blog/menopause-ivf
+
+### age-45-55
+- **tr** — https://dogusivf.net/tr/blog/age-45-55
+- **en** — https://dogusivf.net/en/blog/age-45-55
+- **de** — https://dogusivf.net/de/blog/age-45-55
+- **ru** — https://dogusivf.net/ru/blog/age-45-55
+- **ar** — https://dogusivf.net/ar/blog/age-45-55
+
+### tandem-mini-ivf
+- **tr** — https://dogusivf.net/tr/blog/tandem-mini-ivf
+- **en** — https://dogusivf.net/en/blog/tandem-mini-ivf
+- **de** — https://dogusivf.net/de/blog/tandem-mini-ivf
+- **ru** — https://dogusivf.net/ru/blog/tandem-mini-ivf
+- **ar** — https://dogusivf.net/ar/blog/tandem-mini-ivf
+
+### pandemic-ivf
+- **tr** — https://dogusivf.net/tr/blog/pandemic-ivf
+- **en** — https://dogusivf.net/en/blog/pandemic-ivf
+- **de** — https://dogusivf.net/de/blog/pandemic-ivf
+- **ru** — https://dogusivf.net/ru/blog/pandemic-ivf
+- **ar** — https://dogusivf.net/ar/blog/pandemic-ivf
+
+### sperm-donation-de
+- **tr** — https://dogusivf.net/tr/blog/sperm-donation-de
+- **en** — https://dogusivf.net/en/blog/sperm-donation-de
+- **de** — https://dogusivf.net/de/blog/sperm-donation-de
+- **ru** — https://dogusivf.net/ru/blog/sperm-donation-de
+- **ar** — https://dogusivf.net/ar/blog/sperm-donation-de
+
+### egg-donation-de
+- **tr** — https://dogusivf.net/tr/blog/egg-donation-de
+- **en** — https://dogusivf.net/en/blog/egg-donation-de
+- **de** — https://dogusivf.net/de/blog/egg-donation-de
+- **ru** — https://dogusivf.net/ru/blog/egg-donation-de
+- **ar** — https://dogusivf.net/ar/blog/egg-donation-de
+
+### why-north-cyprus-ivf
+- **tr** — https://dogusivf.net/tr/blog/why-north-cyprus-ivf
+- **en** — https://dogusivf.net/en/blog/why-north-cyprus-ivf
+- **de** — https://dogusivf.net/de/blog/why-north-cyprus-ivf
+- **ru** — https://dogusivf.net/ru/blog/why-north-cyprus-ivf
+- **ar** — https://dogusivf.net/ar/blog/why-north-cyprus-ivf
+
+### fertil-plus
+- **tr** — https://dogusivf.net/tr/blog/fertil-plus
+- **en** — https://dogusivf.net/en/blog/fertil-plus
+- **de** — https://dogusivf.net/de/blog/fertil-plus
+- **ru** — https://dogusivf.net/ru/blog/fertil-plus
+- **ar** — https://dogusivf.net/ar/blog/fertil-plus
+
+### egg-donation-success-factors
+- **tr** — https://dogusivf.net/tr/blog/egg-donation-success-factors
+- **en** — https://dogusivf.net/en/blog/egg-donation-success-factors
+- **de** — https://dogusivf.net/de/blog/egg-donation-success-factors
+- **ru** — https://dogusivf.net/ru/blog/egg-donation-success-factors
+- **ar** — https://dogusivf.net/ar/blog/egg-donation-success-factors
+
+### men-without-sperm
+- **tr** — https://dogusivf.net/tr/blog/men-without-sperm
+- **en** — https://dogusivf.net/en/blog/men-without-sperm
+- **de** — https://dogusivf.net/de/blog/men-without-sperm
+- **ru** — https://dogusivf.net/ru/blog/men-without-sperm
+- **ar** — https://dogusivf.net/ar/blog/men-without-sperm
+
+### prp-method
+- **tr** — https://dogusivf.net/tr/blog/prp-method
+- **en** — https://dogusivf.net/en/blog/prp-method
+- **de** — https://dogusivf.net/de/blog/prp-method
+- **ru** — https://dogusivf.net/ru/blog/prp-method
+- **ar** — https://dogusivf.net/ar/blog/prp-method
+
+### sperm-donation-donor-sperm
+- **tr** — https://dogusivf.net/tr/blog/sperm-donation-donor-sperm
+- **en** — https://dogusivf.net/en/blog/sperm-donation-donor-sperm
+- **de** — https://dogusivf.net/de/blog/sperm-donation-donor-sperm
+- **ru** — https://dogusivf.net/ru/blog/sperm-donation-donor-sperm
+- **ar** — https://dogusivf.net/ar/blog/sperm-donation-donor-sperm
 

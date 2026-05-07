@@ -20,6 +20,27 @@ const DATA_DIR = join(ROOT, 'data');
 const BASE_URL = 'https://dogusivf.net';
 const LANGS = ['tr', 'en', 'de', 'ru', 'ar'];
 
+// Blog posts are defined inline in constants.tsx as a single array. We
+// extract their ids with a simple regex — same idea as treatments below.
+function loadBlogPosts() {
+  const file = join(ROOT, 'constants.tsx');
+  const src = readFileSync(file, 'utf8');
+  // Find the BLOG_POSTS array section and extract IDs from it.
+  const blogStart = src.indexOf('export const BLOG_POSTS');
+  if (blogStart < 0) return [];
+  const blogSrc = src.slice(blogStart);
+  const matches = [...blogSrc.matchAll(/\bid:\s*'([a-z0-9-]+)'/g)];
+  // Each post has 1 id; drop duplicates just in case.
+  const seen = new Set();
+  const posts = [];
+  for (const m of matches) {
+    if (seen.has(m[1])) continue;
+    seen.add(m[1]);
+    posts.push({ id: m[1] });
+  }
+  return posts;
+}
+
 // Treatments are TS source. We import them indirectly by reading the slug + id
 // from each file using a cheap regex parse — no TS compiler needed at build
 // time. This keeps the sitemap script dependency-free.
@@ -56,7 +77,7 @@ function loadTreatments() {
   return treatments;
 }
 
-function buildUrls(treatments) {
+function buildUrls(treatments, blogPosts) {
   const urls = [];
   // Static pages per language
   const staticPaths = ['', '/treatments', '/about', '/contact', '/blog'];
@@ -70,6 +91,12 @@ function buildUrls(treatments) {
     for (const lang of LANGS) {
       const slug = t.slug[lang];
       if (slug) urls.push(`${BASE_URL}/${lang}/treatments/${slug}`);
+    }
+  }
+  // Blog post pages per language (single id used across all langs)
+  for (const post of blogPosts) {
+    for (const lang of LANGS) {
+      urls.push(`${BASE_URL}/${lang}/blog/${post.id}`);
     }
   }
   return urls;
@@ -99,9 +126,10 @@ function escapeXml(s) {
 
 function main() {
   const treatments = loadTreatments();
-  const urls = buildUrls(treatments);
+  const blogPosts = loadBlogPosts();
+  const urls = buildUrls(treatments, blogPosts);
 
-  // Build hreflang groups: every treatment URL gets its 5-language alternates.
+  // Build hreflang groups: every URL gets its 5-language alternates.
   const sections = [];
   // 1) Static pages, grouped per page across languages
   const staticPages = ['', '/treatments', '/about', '/contact', '/blog'];
@@ -117,6 +145,14 @@ function main() {
     }));
     for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates));
   }
+  // 3) Blog post pages, grouped per post across languages
+  for (const post of blogPosts) {
+    const alternates = LANGS.map((lang) => ({
+      lang,
+      url: `${BASE_URL}/${lang}/blog/${post.id}`,
+    }));
+    for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates));
+  }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -126,7 +162,7 @@ ${sections.join('\n')}
 
   mkdirSync(PUBLIC_DIR, { recursive: true });
   writeFileSync(join(PUBLIC_DIR, 'sitemap.xml'), xml, 'utf8');
-  console.log(`Wrote public/sitemap.xml with ${urls.length} URLs (${treatments.length} treatments × ${LANGS.length} langs + static).`);
+  console.log(`Wrote public/sitemap.xml with ${urls.length} URLs (${treatments.length} treatments + ${blogPosts.length} blog posts × ${LANGS.length} langs + static).`);
 
   // robots.txt — point search engines at the sitemap.
   const robots = `User-agent: *
@@ -151,6 +187,14 @@ Sitemap: ${BASE_URL}/sitemap.xml
       const slug = t.slug[lang];
       const title = t.title[lang] || '-';
       if (slug) md += `- **${lang}** — [${title}](${BASE_URL}/${lang}/treatments/${slug})\n`;
+    }
+    md += '\n';
+  }
+  md += '\n## Blog posts\n\n';
+  for (const post of blogPosts) {
+    md += `### ${post.id}\n`;
+    for (const lang of LANGS) {
+      md += `- **${lang}** — ${BASE_URL}/${lang}/blog/${post.id}\n`;
     }
     md += '\n';
   }
