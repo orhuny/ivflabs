@@ -32,12 +32,12 @@ function buildAlternates(t: Treatment): SEOAlternate[] {
 function buildMedicalProcedureJsonLd(t: Treatment, lang: Language): Record<string, unknown> {
   const url = `${SITE_BASE}${treatmentPath(lang, t)}`;
   const desc = t.intro?.[lang] ?? t.description[lang];
+  const hasSuccessRate = t.successRate && !['Varies', 'Adjunctive'].includes(t.successRate);
   return {
     '@context': 'https://schema.org',
     '@type': 'MedicalProcedure',
     name: t.title[lang],
     description: desc.slice(0, 480),
-    procedureType: 'http://schema.org/TherapeuticProcedure',
     inLanguage: lang,
     url,
     image: t.image.startsWith('http') ? t.image : `${SITE_BASE}${t.image}`,
@@ -53,8 +53,14 @@ function buildMedicalProcedureJsonLd(t: Treatment, lang: Language): Record<strin
         addressCountry: 'CY',
       },
     },
-    ...(t.successRate && t.successRate !== 'Varies' && t.successRate !== 'Adjunctive'
-      ? { howPerformed: t.successRate }
+    ...(hasSuccessRate
+      ? {
+          additionalProperty: {
+            '@type': 'PropertyValue',
+            name: 'successRate',
+            value: t.successRate,
+          },
+        }
       : {}),
   };
 }
