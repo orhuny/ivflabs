@@ -147,22 +147,22 @@ async function main() {
       // Give React a moment to commit the SEO tags into <head>.
       await page.waitForFunction(() => document.title && document.title.length > 0, { timeout: 8000 });
       // React 19's metadata support inserts new <title>/<meta>/<link> nodes
-      // without removing the static ones from index.html. That leaves the
-      // prerendered HTML with two titles, two descriptions, etc. — bad for
-      // SEO. Remove duplicates here, keeping the React-rendered (last) copy.
+      // without removing the static ones from index.html. React hoists its
+      // own tags to the top of <head>, so the order is [React, Static].
+      // Keep the FIRST element (React's) and drop the rest.
       await page.evaluate(() => {
         const dedupe = (selector, keepKey) => {
           const els = Array.from(document.querySelectorAll(selector));
           if (els.length <= 1) return;
           if (keepKey) {
             const seen = new Set();
-            for (const el of els.reverse()) {
+            for (const el of els) {
               const k = keepKey(el);
               if (seen.has(k)) el.remove();
               else seen.add(k);
             }
           } else {
-            for (let i = 0; i < els.length - 1; i++) els[i].remove();
+            for (let i = 1; i < els.length; i++) els[i].remove();
           }
         };
         dedupe('head > title');
