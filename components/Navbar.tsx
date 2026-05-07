@@ -52,7 +52,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang }) => {
             <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group">
               <div className={`relative ${shouldUseLightTheme ? 'bg-white p-1.5 sm:p-2 lg:p-2.5 rounded-lg sm:rounded-xl' : 'bg-white/40 p-1.5 sm:p-2 lg:p-2.5 rounded-lg sm:rounded-xl backdrop-blur-md'} transition-all duration-300`}>
                 <img
-                  src="https://ivfnorthcyprus.com/assets/img/logo.png"
+                  src="/logo.png"
                   alt="Doğuş IVF Center Logo"
                   className="h-10 sm:h-14 lg:h-20 w-auto"
                   style={{ filter: shouldUseLightTheme ? 'none' : 'brightness(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}

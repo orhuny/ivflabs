@@ -54,7 +54,7 @@ const Footer: React.FC<FooterProps> = ({ lang }) => {
           <div className="col-span-2 md:col-span-1">
             <a href={prefix} className="flex items-center mb-6">
               <img
-                src="https://ivfnorthcyprus.com/assets/img/logo.png"
+                src="/logo.png"
                 alt="Doğuş IVF Center Logo"
                 className="h-14 w-auto"
               />

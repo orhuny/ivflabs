@@ -57,7 +57,7 @@ function buildBlogPostingJsonLd(post: BlogPost, lang: Language): Record<string, 
       url: SITE_BASE,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://ivfnorthcyprus.com/assets/img/logo.png',
+        url: `${SITE_BASE}/logo.png`,
       },
     },
   };
