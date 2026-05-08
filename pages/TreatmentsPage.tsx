@@ -20,7 +20,6 @@ const T = {
     ru: 'Ознакомьтесь с нашими методами лечения',
     ar: 'استكشف طرق العلاج لدينا',
   },
-  home: { tr: 'Ana Sayfa', en: 'Home', de: 'Startseite', ru: 'Главная', ar: 'الرئيسية' },
   successRate: { tr: 'Başarı', en: 'Success', de: 'Erfolg', ru: 'Успех', ar: 'نجاح' },
   duration: { tr: 'Süre', en: 'Duration', de: 'Dauer', ru: 'Длительность', ar: 'المدة' },
   details: { tr: 'Detaylı Bilgi', en: 'Learn More', de: 'Mehr erfahren', ru: 'Подробнее', ar: 'تفاصيل أكثر' },
@@ -71,14 +70,6 @@ const TreatmentsPage: React.FC = () => {
         jsonLd={[itemListJsonLd]}
       />
       <div className="container mx-auto px-6">
-        <Link
-          to={`/${lang}`}
-          className="mb-8 inline-flex items-center text-cyan-600 hover:text-cyan-700 transition-colors font-semibold group"
-        >
-          <i className="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
-          {T.home[lang]}
-        </Link>
-
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 bg-primary-100 text-primary-600 text-sm font-semibold rounded-full mb-4">
             {T.badge[lang]}
