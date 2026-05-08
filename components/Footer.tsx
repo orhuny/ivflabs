@@ -3,6 +3,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../constants';
+import { findTreatmentById, treatmentPath } from '../pages/treatments';
 import ContactSection from './ContactSection';
 
 interface FooterProps {
@@ -28,12 +29,11 @@ const Footer: React.FC<FooterProps> = ({ lang }) => {
     { href: `${prefix}/contact`, label: t.navContact },
   ];
 
-  const services = [
-    { en: 'IVF Treatment', tr: 'Tüp Bebek Tedavisi' },
-    { en: 'ICSI', tr: 'ICSI (Mikroenjeksiyon)' },
-    { en: 'Genetic Testing', tr: 'Genetik Tarama' },
-    { en: 'Egg Freezing', tr: 'Yumurta Dondurma' },
-  ];
+  // Featured treatments shown in footer. IDs come from pages/treatments/.
+  const featuredServiceIds = ['ivf', 'icsi', 'pgd-pgs', 'egg-freezing', 'egg-donation', 'iui'];
+  const featuredServices = featuredServiceIds
+    .map((id) => findTreatmentById(id))
+    .filter((t): t is NonNullable<ReturnType<typeof findTreatmentById>> => Boolean(t));
 
   return (
     <footer id="contact" className="bg-gray-900 text-white relative overflow-hidden">
@@ -97,11 +97,14 @@ const Footer: React.FC<FooterProps> = ({ lang }) => {
           <div>
             <h4 className="text-lg font-bold text-white mb-6">{t.navServices}</h4>
             <ul className="space-y-4">
-              {services.map((service, idx) => (
-                <li key={idx}>
-                  <a href={`${prefix}/treatments`} className="text-gray-400 hover:text-primary-400 transition-colors flex items-center group">
+              {featuredServices.map((service) => (
+                <li key={service.id}>
+                  <a
+                    href={treatmentPath(lang, service)}
+                    className="text-gray-400 hover:text-primary-400 transition-colors flex items-center group"
+                  >
                     <i className="fas fa-chevron-right text-xs mr-2 opacity-0 group-hover:opacity-100 transition-opacity text-primary-400"></i>
-                    {service[lang]}
+                    {service.title[lang]}
                   </a>
                 </li>
               ))}
