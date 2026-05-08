@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LocaleLayout from './components/LocaleLayout';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import TreatmentsPage from './pages/TreatmentsPage';
 import TreatmentDetailPage from './pages/TreatmentDetailPage';
@@ -12,6 +13,7 @@ import BlogPage from './pages/BlogPage';
 const App: React.FC = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Navigate to="/tr" replace />} />
         <Route path="/treatments" element={<Navigate to="/tr/treatments" replace />} />
