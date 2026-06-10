@@ -7,6 +7,53 @@ import SEO from '../components/SEO';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../constants';
 
+/** Base URL for canonical/JSON-LD (no trailing slash). Matches SEO.tsx. */
+const SITE_BASE = typeof import.meta !== 'undefined' && (import.meta as { env?: { VITE_SITE_URL?: string } }).env?.VITE_SITE_URL
+  ? (import.meta as { env: { VITE_SITE_URL: string } }).env.VITE_SITE_URL
+  : 'https://dogusivf.net';
+
+/**
+ * Site-wide clinic identity for Google (Knowledge Panel, brand entity, local SEO).
+ * Anchored at a stable @id so other pages' JSON-LD can reference this entity.
+ * NOTE: add `geo` (lat/lng) and `openingHoursSpecification` here if/when known —
+ * omitted deliberately rather than guessed, since wrong structured data hurts.
+ */
+function buildClinicJsonLd(lang: Language, description: string): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalClinic',
+    '@id': `${SITE_BASE}/#organization`,
+    name: 'Doğuş IVF Center',
+    alternateName: 'Doğuş Tüp Bebek Merkezi',
+    url: SITE_BASE,
+    logo: `${SITE_BASE}/logo.png`,
+    image: `${SITE_BASE}/images/ivf-centre-babies.jpg`,
+    description,
+    inLanguage: lang,
+    telephone: '+905338692330',
+    email: 'cyprusivflabs@gmail.com',
+    medicalSpecialty: 'Gynecologic',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Şht. Erdoğan Mustafa Sk.',
+      addressLocality: 'Lefkoşa',
+      addressRegion: 'KKTC',
+      addressCountry: 'CY',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+905338692330',
+      contactType: 'customer service',
+      availableLanguage: ['Turkish', 'English', 'German', 'Russian', 'Arabic'],
+    },
+    areaServed: ['CY', 'TR', 'DE', 'RU', 'GB'],
+    sameAs: [
+      'https://www.facebook.com/dogusivfcyprus',
+      'https://www.instagram.com/dogusivfcyprus',
+    ],
+  };
+}
+
 const Home: React.FC = () => {
   const { lang } = useOutletContext<{ lang: Language }>();
   const t = TRANSLATIONS[lang];
@@ -16,7 +63,7 @@ const Home: React.FC = () => {
 
   return (
     <main>
-      <SEO title={seoTitle} description={seoDescription} lang={lang} image="/images/ivf-centre-babies.jpg" />
+      <SEO title={seoTitle} description={seoDescription} lang={lang} image="/images/ivf-centre-babies.jpg" jsonLd={[buildClinicJsonLd(lang, seoDescription)]} />
       <Hero lang={lang} />
 
       {/* Happy Families Gallery */}
