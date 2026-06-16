@@ -4,11 +4,11 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/", "destination": "/tr", "permanent": false },
-    { "source": "/treatments", "destination": "/tr/treatments", "permanent": false },
-    { "source": "/about", "destination": "/tr/about", "permanent": false },
-    { "source": "/contact", "destination": "/tr/contact", "permanent": false },
-    { "source": "/blog", "destination": "/tr/blog", "permanent": false }
+    { "source": "/", "destination": "/tr", "permanent": true },
+    { "source": "/treatments", "destination": "/tr/treatments", "permanent": true },
+    { "source": "/about", "destination": "/tr/about", "permanent": true },
+    { "source": "/contact", "destination": "/tr/contact", "permanent": true },
+    { "source": "/blog", "destination": "/tr/blog", "permanent": true }
   ],
   "rewrites": [
     { "source": "/((?!.*\\.).*)", "destination": "/index.html" }
