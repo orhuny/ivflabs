@@ -82,12 +82,12 @@ const AboutPage: React.FC = () => {
             <div className="relative">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
-                  <img src="/images/baby_photo1.jpg" alt="Hospital" loading="lazy" className="rounded-2xl shadow-lg w-full h-48 object-cover" />
-                  <img src="/images/baby_photo2.jpg" alt="Laboratory" loading="lazy" className="rounded-2xl shadow-lg w-full h-64 object-cover" />
+                  <img src="/images/dogus-hastane-klinik-1.jpg" alt="Doğuş Hastanesi resepsiyon ve giriş" loading="lazy" className="rounded-2xl shadow-lg w-full h-48 object-cover" />
+                  <img src="/images/dogus-hastane-1.jpg" alt="Doğuş Hastanesi bekleme salonu" loading="lazy" className="rounded-2xl shadow-lg w-full h-64 object-cover" />
                 </div>
                 <div className="space-y-4 pt-8">
-                  <img src="/images/baby_photo3.jpg" alt="Equipment" loading="lazy" className="rounded-2xl shadow-lg w-full h-64 object-cover" />
-                  <img src="/images/Happy-Baby-Kissing-Happy-Mother_edited.jpg" alt="Consultation" loading="lazy" className="rounded-2xl shadow-lg w-full h-48 object-cover" />
+                  <img src="/images/dogus-hastane-3.jpg" alt="Doğuş Hastanesi hasta odası" loading="lazy" className="rounded-2xl shadow-lg w-full h-64 object-cover" />
+                  <img src="/images/dogus-hastane-2.jpg" alt="Doğuş Hastanesi dinlenme alanı" loading="lazy" className="rounded-2xl shadow-lg w-full h-48 object-cover" />
                 </div>
               </div>
               <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl p-6 flex items-center gap-8">

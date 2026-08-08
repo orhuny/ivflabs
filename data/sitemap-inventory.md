@@ -1,6 +1,6 @@
 # Sitemap Inventory
 
-Generated 2026-08-08T10:12:10.118Z — 190 URLs.
+Generated 2026-08-08T10:31:18.518Z — 195 URLs.
 
 ## Static pages
 
@@ -126,6 +126,13 @@ Generated 2026-08-08T10:12:10.118Z — 190 URLs.
 
 
 ## Blog posts
+
+### egg-donation-process-guide
+- **tr** — https://dogusivf.net/tr/blog/egg-donation-process-guide
+- **en** — https://dogusivf.net/en/blog/egg-donation-process-guide
+- **de** — https://dogusivf.net/de/blog/egg-donation-process-guide
+- **ru** — https://dogusivf.net/ru/blog/egg-donation-process-guide
+- **ar** — https://dogusivf.net/ar/blog/egg-donation-process-guide
 
 ### egg-donation-stages
 - **tr** — https://dogusivf.net/tr/blog/egg-donation-stages
