@@ -37,23 +37,13 @@ const Hero: React.FC<HeroProps> = ({ lang }) => {
   return (
     <section
       id="home"
-      className="relative w-full flex items-center overflow-hidden min-h-screen"
-      style={{ minHeight: '100vh', minHeight: '100dvh' }}
+      className="relative w-full flex items-start md:items-center overflow-hidden min-h-dvh-safe"
     >
       {/* Background: mobilde 100dvh ile tam ekran, cover zorunlu */}
-      <div
-        className="absolute inset-0 w-full"
-        style={{ minHeight: '100vh', minHeight: '100dvh', top: 0, left: 0, right: 0, bottom: 0 }}
-      >
+      <div className="absolute inset-0 w-full">
         <div
           className="absolute inset-0 w-full transition-transform duration-1000 ease-out opacity-55"
           style={{
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            minHeight: '100vh',
-            minHeight: '100dvh',
             backgroundImage: `url('${heroBgImage}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
@@ -81,7 +71,7 @@ const Hero: React.FC<HeroProps> = ({ lang }) => {
         }}></div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10 pt-16 sm:pt-20">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 pt-24 md:pt-20">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-16 items-center">
           {/* Left Content */}
           <div className="max-w-2xl">

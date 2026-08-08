@@ -52,6 +52,15 @@ const TESTIMONIALS: Array<{ name: string; text: Record<Language, string> }> = [
   }
 ];
 
+const GALLERY_IMAGES = [
+  '/images/baby_photo1.jpg',
+  '/images/baby_photo2.jpg',
+  '/images/baby_photo3.jpg',
+  '/images/Happy-Baby-Kissing-Happy-Mother_edited.jpg',
+  '/images/mommy-and-baby-happy-small.jpg',
+  '/images/mother&baby at the beach.jpg',
+];
+
 const HOME_SECTION_COPY = {
   teamTag: { tr: 'Uzman Kadro', en: 'Expert Team', de: 'Expertenteam', ru: 'Команда экспертов', ar: 'فريق متخصص' },
   teamTitle: { tr: 'Ekibimizle Tanışın', en: 'Meet Our Team', de: 'Lernen Sie unser Team kennen', ru: 'Познакомьтесь с нашей командой', ar: 'تعرفوا على فريقنا' },
@@ -135,7 +144,7 @@ const Home: React.FC = () => {
       <SEO title={seoTitle} description={seoDescription} lang={lang} image="/images/ivf-centre-babies.jpg" jsonLd={[buildClinicJsonLd(lang, seoDescription)]} />
       <Hero lang={lang} />
 
-      {/* Happy Families Gallery */}
+      {/* Happy Families Gallery — kenar fade'li, otomatik kayan galeri (hover'da durur) */}
       <section className="py-16 bg-white overflow-hidden">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
@@ -146,23 +155,24 @@ const Home: React.FC = () => {
               {lang === 'tr' ? 'Hayallerini Gerçekleştiren Aileler' : 'Families Who Achieved Their Dreams'}
             </h2>
           </div>
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-            {[
-              '/images/baby_photo1.jpg',
-              '/images/baby_photo2.jpg',
-              '/images/baby_photo3.jpg',
-              '/images/Happy-Baby-Kissing-Happy-Mother_edited.jpg',
-              '/images/mommy-and-baby-happy-small.jpg',
-              '/images/mother&baby at the beach.jpg',
-            ].map((img, idx) => (
-              <div key={idx} className="relative shrink-0 w-64 h-80 rounded-3xl overflow-hidden group">
-                <img src={img} alt={`Happy family ${idx + 1}`} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <i className="fas fa-heart text-pink-400 mb-2"></i>
-                    <p className="text-sm">{lang === 'tr' ? 'Doğuş Tüp Bebek ailesi' : 'Doğuş IVF family'}</p>
+        </div>
+        <div className="relative" dir="ltr">
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-40 bg-gradient-to-r from-white to-transparent z-10"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-40 bg-gradient-to-l from-white to-transparent z-10"></div>
+          <div className="flex w-max animate-marquee">
+            {[0, 1].map((set) => (
+              <div key={set} className="flex" aria-hidden={set === 1}>
+                {GALLERY_IMAGES.map((img, idx) => (
+                  <div key={idx} className="relative shrink-0 w-64 h-80 rounded-3xl overflow-hidden group mr-4">
+                    <img src={img} alt={set === 0 ? `Happy family ${idx + 1}` : ''} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="absolute bottom-4 left-4 right-4 text-white">
+                        <i className="fas fa-heart text-pink-400 mb-2"></i>
+                        <p className="text-sm">{lang === 'tr' ? 'Doğuş Tüp Bebek ailesi' : 'Doğuş IVF family'}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             ))}
           </div>
@@ -272,38 +282,60 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* About & Contact teaser - link to dedicated pages */}
+      {/* Hastane CTA bandı — hakkımızda & iletişime görsel yönlendirme */}
       <section className="py-24 bg-white overflow-hidden">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-xl sm:text-2xl md:text-4xl font-serif text-gray-900 mb-6">
-            {lang === 'tr' ? 'Merkezimiz ve Ekibimiz' : lang === 'en' ? 'Our Center & Team' : lang === 'de' ? 'Unser Zentrum & Team' : lang === 'ru' ? 'Наш центр и команда' : 'مركزنا وفريقنا'}
-          </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-10">
-            {lang === 'tr'
-              ? 'Doğuş Tüp Bebek Merkezi hakkında detaylı bilgi, uzman kadromuz ve iletişim seçenekleri için aşağıdaki sayfaları ziyaret edin.'
-              : lang === 'en'
-              ? 'Visit the pages below for detailed information about our center, our expert team, and contact options.'
-              : lang === 'de'
-              ? 'Besuchen Sie die folgenden Seiten für weitere Informationen zu unserem Zentrum, unserem Team und Kontaktmöglichkeiten.'
-              : lang === 'ru'
-              ? 'Посетите страницы ниже для подробной информации о нашем центре, команде и контактах.'
-              : 'قم بزيارة الصفحات أدناه لمزيد من المعلومات حول مركزنا وفريقنا وطرق التواصل.'}
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href={`/${lang}/about`}
-              className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
-            >
-              {t.navAbout}
-              <i className="fas fa-arrow-right ml-3"></i>
-            </a>
-            <a
-              href={`/${lang}/contact`}
-              className="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors"
-            >
-              {t.navContact}
-              <i className="fas fa-envelope ml-3"></i>
-            </a>
+        <div className="container mx-auto px-6">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-primary-800 via-primary-700 to-cyan-600 shadow-2xl">
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-cyan-300/20 rounded-full blur-3xl pointer-events-none" aria-hidden></div>
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" aria-hidden></div>
+            <div className="relative grid lg:grid-cols-2 items-center gap-10 p-8 md:p-14 lg:p-16">
+              <div className="text-white text-center lg:text-start">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-5">
+                  {lang === 'tr' ? 'Merkezimiz ve Ekibimiz' : lang === 'en' ? 'Our Center & Team' : lang === 'de' ? 'Unser Zentrum & Team' : lang === 'ru' ? 'Наш центр и команда' : 'مركزنا وفريقنا'}
+                </h2>
+                <p className="text-white/85 text-lg mb-9 max-w-xl mx-auto lg:mx-0">
+                  {lang === 'tr'
+                    ? 'Doğuş Tüp Bebek Merkezi hakkında detaylı bilgi, uzman kadromuz ve iletişim seçenekleri için sayfalarımızı ziyaret edin.'
+                    : lang === 'en'
+                    ? 'Visit our pages for detailed information about our center, our expert team, and contact options.'
+                    : lang === 'de'
+                    ? 'Besuchen Sie unsere Seiten für weitere Informationen zu unserem Zentrum, unserem Team und Kontaktmöglichkeiten.'
+                    : lang === 'ru'
+                    ? 'Посетите наши страницы для подробной информации о нашем центре, команде и контактах.'
+                    : 'قم بزيارة صفحاتنا لمزيد من المعلومات حول مركزنا وفريقنا وطرق التواصل.'}
+                </p>
+                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                  <a
+                    href={`/${lang}/about`}
+                    className="inline-flex items-center px-6 py-3 bg-white text-primary-700 font-semibold rounded-xl hover:bg-cyan-50 transition-colors shadow-lg"
+                  >
+                    {t.navAbout}
+                    <i className="fas fa-arrow-right ms-3"></i>
+                  </a>
+                  <a
+                    href={`/${lang}/contact`}
+                    className="inline-flex items-center px-6 py-3 border border-white/40 text-white font-semibold rounded-xl hover:bg-white/10 transition-colors"
+                  >
+                    {t.navContact}
+                    <i className="fas fa-envelope ms-3"></i>
+                  </a>
+                </div>
+              </div>
+              <div className="hidden lg:grid grid-cols-2 gap-4">
+                <img
+                  src="/images/dogus-hastane-1.jpg"
+                  alt={lang === 'tr' ? 'Doğuş Hastanesi' : 'Doğuş Hospital'}
+                  loading="lazy"
+                  className="rounded-3xl shadow-lg w-full h-72 object-cover"
+                />
+                <img
+                  src="/images/dogus-hastane-klinik-1.jpg"
+                  alt={lang === 'tr' ? 'Doğuş Hastanesi klinik' : 'Doğuş Hospital clinic'}
+                  loading="lazy"
+                  className="rounded-3xl shadow-lg w-full h-72 object-cover mt-8"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
