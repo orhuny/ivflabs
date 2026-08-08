@@ -1,6 +1,6 @@
 # Sitemap Inventory
 
-Generated 2026-08-08T10:31:18.518Z — 195 URLs.
+Generated 2026-08-08T11:07:26.922Z — 195 URLs.
 
 ## Static pages
 

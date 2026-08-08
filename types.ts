@@ -81,6 +81,7 @@ export interface BlogPost {
   category: Record<Language, string>;
   featured?: boolean;
   image: string;
+  faqs?: Record<Language, Array<{ q: string; a: string }>>;
 }
 
 export interface Message {

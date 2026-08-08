@@ -16,6 +16,7 @@ const T = {
   blog: { tr: 'Blog', en: 'Blog', de: 'Blog', ru: 'Блог', ar: 'المدونة' },
   notFound: { tr: 'Yazı bulunamadı', en: 'Post not found', de: 'Beitrag nicht gefunden', ru: 'Запись не найдена', ar: 'المقال غير موجود' },
   backToBlog: { tr: 'Bloga Dön', en: 'Back to Blog', de: 'Zurück zum Blog', ru: 'Вернуться в блог', ar: 'العودة إلى المدونة' },
+  faq: { tr: 'Sıkça Sorulan Sorular', en: 'Frequently Asked Questions', de: 'Häufig gestellte Fragen', ru: 'Часто задаваемые вопросы', ar: 'الأسئلة الشائعة' },
 } as const;
 
 function postPath(lang: Language, postId: string): string {
@@ -60,6 +61,20 @@ function buildBlogPostingJsonLd(post: BlogPost, lang: Language): Record<string, 
         url: `${SITE_BASE}/logo.png`,
       },
     },
+  };
+}
+
+function buildFaqJsonLd(post: BlogPost, lang: Language): Record<string, unknown> | null {
+  const faqs = post.faqs?.[lang];
+  if (!faqs || faqs.length === 0) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
   };
 }
 
@@ -145,6 +160,9 @@ const BlogPage: React.FC = () => {
     const seoDescription = (post.excerpt[lang] || '').replace(/\s+/g, ' ').slice(0, 160);
     const alternates = buildPostAlternates(post.id);
     const jsonLd = [buildBlogPostingJsonLd(post, lang), buildBreadcrumbJsonLd(lang, post)];
+    const faqJsonLd = buildFaqJsonLd(post, lang);
+    if (faqJsonLd) jsonLd.push(faqJsonLd);
+    const faqs = post.faqs?.[lang];
 
     return (
       <article className="pt-32 pb-24 bg-white min-h-screen">
@@ -196,6 +214,25 @@ const BlogPage: React.FC = () => {
               <p className="text-xl text-gray-600 mb-8">{post.excerpt[lang]}</p>
               <div className="whitespace-pre-line text-base leading-relaxed">{post.content[lang]}</div>
             </div>
+            {faqs && faqs.length > 0 && (
+              <section className="mt-16">
+                <h2 className="text-2xl md:text-3xl font-serif text-gray-900 mb-8">{T.faq[lang]}</h2>
+                <div className="space-y-4">
+                  {faqs.map((faq, idx) => (
+                    <details
+                      key={idx}
+                      className="group bg-gray-50 rounded-2xl border border-gray-100 open:bg-white open:shadow-md transition-all"
+                    >
+                      <summary className="cursor-pointer list-none flex items-center justify-between gap-4 p-6 font-semibold text-gray-900">
+                        <span>{faq.q}</span>
+                        <i className="fas fa-chevron-down text-cyan-600 transition-transform group-open:rotate-180"></i>
+                      </summary>
+                      <p className="px-6 pb-6 text-gray-600 leading-relaxed">{faq.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
         </div>
       </article>

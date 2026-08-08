@@ -212,7 +212,49 @@ export const BLOG_POSTS: BlogPost[] = [
       ar: 'التبرع بالبويضات'
     },
     featured: true,
-    image: '/images/dogus-hastane-klinik-1.jpg'
+    image: '/images/dogus-hastane-klinik-1.jpg',
+    faqs: {
+      tr: [
+        { q: 'Yumurta donasyonu tedavisi için Kıbrıs\'ta ne kadar kalmam gerekir?', a: 'Tetkikler ve rahmin hazırlanması gibi ön aşamalar kendi ülkenizde yürütülebilir. Çoğu hastamız yalnızca embriyolojik işlemleri ve embriyo transferini kapsayan son bölümde adada bulunur; embriyolojik süreç yaklaşık 1 hafta sürer. Kesin takvim, size özel tedavi planınıza göre belirlenir.' },
+        { q: 'Donörün kimliğini öğrenebilir miyim?', a: 'Hayır, donör kimliği gizlidir. Eşleştirme; fiziksel özellikler ve kan grubu uyumuna göre yapılır. Tüm donörlerimiz detaylı tıbbi ve genetik taramadan geçmiş sağlıklı, genç kadınlardır.' },
+        { q: 'Yumurta donasyonunda başarı oranı nedir?', a: 'Genç ve sağlıklı donörler kullanıldığı için başarı oranları standart tüp bebek tedavisine göre daha yüksektir; merkezimizde döngü başına %70-85 aralığındadır. Oran; rahim sağlığı, sperm kalitesi ve genel sağlık durumuna göre değişebilir.' },
+        { q: 'Yumurta donasyonu kimler için uygundur?', a: 'Yumurta rezervi tükenmiş, erken menopoz yaşamış, yumurta kalitesi düşük veya genetik hastalık taşıyıcılığı bulunan kadınlar ile tekrarlayan tüp bebek başarısızlığı yaşayan çiftler için uygun bir tedavi seçeneğidir.' },
+        { q: 'Gebelik testi ne zaman yapılır?', a: 'Embriyo transferinden 12 gün sonra kan (beta hCG) testi ile gebelik sonucu öğrenilir.' },
+        { q: 'Kalan embriyolar dondurulabilir mi?', a: 'Evet. İyi kalitedeki embriyolar dondurularak saklanabilir ve ileride yeni bir donör süreci gerekmeden ikinci bir transfer için kullanılabilir.' }
+      ],
+      en: [
+        { q: 'How long do I need to stay in Cyprus for egg donation treatment?', a: 'Preliminary steps such as tests and uterine preparation can be completed in your home country. Most of our patients only stay on the island for the final part covering the embryology procedures and embryo transfer; the embryological phase takes about one week. Your exact schedule is planned individually.' },
+        { q: 'Can I learn the identity of the donor?', a: 'No, donor identity is confidential. Matching is based on physical characteristics and blood type compatibility. All our donors are healthy young women who have passed detailed medical and genetic screening.' },
+        { q: 'What is the success rate of egg donation?', a: 'Because young, healthy donors are used, success rates are higher than standard IVF; at our center they range from 70-85% per cycle. The rate can vary depending on uterine health, sperm quality and overall health.' },
+        { q: 'Who is egg donation suitable for?', a: 'It is a suitable option for women with depleted egg reserve, early menopause, poor egg quality or genetic disease carriership, and for couples with repeated IVF failures.' },
+        { q: 'When is the pregnancy test done?', a: 'A blood (beta hCG) pregnancy test is performed 12 days after the embryo transfer.' },
+        { q: 'Can the remaining embryos be frozen?', a: 'Yes. Good-quality embryos can be frozen and stored, and used later for a second transfer without needing a new donor cycle.' }
+      ],
+      de: [
+        { q: 'Wie lange muss ich für die Eizellspende-Behandlung auf Zypern bleiben?', a: 'Vorbereitende Schritte wie Untersuchungen und die Vorbereitung der Gebärmutter können im Heimatland erfolgen. Die meisten Patienten sind nur für den letzten Teil mit den embryologischen Verfahren und dem Embryotransfer auf der Insel; die embryologische Phase dauert etwa eine Woche. Ihr genauer Zeitplan wird individuell geplant.' },
+        { q: 'Kann ich die Identität der Spenderin erfahren?', a: 'Nein, die Identität der Spenderin ist vertraulich. Die Zuordnung erfolgt nach körperlichen Merkmalen und Blutgruppenkompatibilität. Alle Spenderinnen sind gesunde junge Frauen mit umfassendem medizinischen und genetischen Screening.' },
+        { q: 'Wie hoch ist die Erfolgsquote bei der Eizellspende?', a: 'Da junge, gesunde Spenderinnen eingesetzt werden, sind die Erfolgsraten höher als bei der Standard-IVF; in unserem Zentrum liegen sie bei 70-85% pro Zyklus. Die Rate kann je nach Gebärmuttergesundheit, Spermienqualität und Allgemeinzustand variieren.' },
+        { q: 'Für wen ist die Eizellspende geeignet?', a: 'Sie ist eine geeignete Option für Frauen mit erschöpfter Eizellreserve, früher Menopause, geringer Eizellqualität oder genetischer Trägerschaft sowie für Paare mit wiederholten IVF-Fehlschlägen.' },
+        { q: 'Wann wird der Schwangerschaftstest durchgeführt?', a: 'Ein Blut-Schwangerschaftstest (Beta-hCG) wird 12 Tage nach dem Embryotransfer durchgeführt.' },
+        { q: 'Können die übrigen Embryonen eingefroren werden?', a: 'Ja. Embryonen guter Qualität können eingefroren und gelagert werden und später für einen zweiten Transfer verwendet werden, ohne dass ein neuer Spenderzyklus nötig ist.' }
+      ],
+      ru: [
+        { q: 'Как долго нужно находиться на Кипре для лечения с донорскими яйцеклетками?', a: 'Подготовительные этапы, такие как анализы и подготовка матки, можно пройти в своей стране. Большинство наших пациентов находятся на острове только на финальной части — эмбриологических процедурах и переносе эмбриона; эмбриологическая фаза занимает около недели. Точный график планируется индивидуально.' },
+        { q: 'Могу ли я узнать личность донора?', a: 'Нет, личность донора конфиденциальна. Подбор осуществляется по внешним характеристикам и совместимости групп крови. Все наши доноры — здоровые молодые женщины, прошедшие детальное медицинское и генетическое обследование.' },
+        { q: 'Какова вероятность успеха при донорстве яйцеклеток?', a: 'Поскольку используются молодые здоровые доноры, показатели успеха выше, чем при стандартном ЭКО; в нашем центре они составляют 70-85% за цикл. Результат может зависеть от состояния матки, качества спермы и общего здоровья.' },
+        { q: 'Кому подходит донорство яйцеклеток?', a: 'Это подходящий вариант для женщин с истощённым резервом яйцеклеток, ранней менопаузой, низким качеством яйцеклеток или носительством генетических заболеваний, а также для пар с повторными неудачами ЭКО.' },
+        { q: 'Когда делается тест на беременность?', a: 'Анализ крови на беременность (бета-ХГЧ) выполняется через 12 дней после переноса эмбриона.' },
+        { q: 'Можно ли заморозить оставшиеся эмбрионы?', a: 'Да. Эмбрионы хорошего качества можно заморозить и хранить, а затем использовать для повторного переноса без нового донорского цикла.' }
+      ],
+      ar: [
+        { q: 'كم من الوقت أحتاج للبقاء في قبرص لعلاج التبرع بالبويضات؟', a: 'يمكن إتمام الخطوات التمهيدية مثل الفحوصات وتهيئة الرحم في بلدك. يبقى معظم مرضانا في الجزيرة فقط للجزء الأخير الذي يشمل إجراءات مختبر الأجنة ونقل الجنين؛ وتستغرق المرحلة الجنينية نحو أسبوع. يُخطط جدولك الزمني الدقيق بشكل فردي.' },
+        { q: 'هل يمكنني معرفة هوية المتبرعة؟', a: 'لا، هوية المتبرعة سرية. تتم المطابقة حسب الصفات الجسدية وتوافق فصيلة الدم. جميع متبرعاتنا نساء شابات أصحاء اجتزن فحوصات طبية ووراثية شاملة.' },
+        { q: 'ما نسبة نجاح التبرع بالبويضات؟', a: 'نظرًا لاستخدام متبرعات شابات وأصحاء، تكون نسب النجاح أعلى من أطفال الأنابيب التقليدي؛ وتتراوح في مركزنا بين 70-85% لكل دورة. قد تختلف النسبة حسب صحة الرحم وجودة الحيوانات المنوية والحالة الصحية العامة.' },
+        { q: 'لمن يناسب التبرع بالبويضات؟', a: 'هو خيار مناسب للنساء ذوات احتياطي البويضات المستنفد أو انقطاع الطمث المبكر أو ضعف جودة البويضات أو حاملات الأمراض الوراثية، وللأزواج الذين تكررت لديهم إخفاقات أطفال الأنابيب.' },
+        { q: 'متى يُجرى اختبار الحمل؟', a: 'يُجرى فحص الدم للحمل (بيتا hCG) بعد 12 يومًا من نقل الجنين.' },
+        { q: 'هل يمكن تجميد الأجنة المتبقية؟', a: 'نعم. يمكن تجميد الأجنة ذات الجودة الجيدة وتخزينها واستخدامها لاحقًا لنقل ثانٍ دون الحاجة إلى دورة متبرعة جديدة.' }
+      ]
+    }
   },
   {
     id: 'egg-donation-stages',
