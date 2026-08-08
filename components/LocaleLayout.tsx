@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, useParams, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import AiAssistant from './AiAssistant';
+import WhatsAppButton from './WhatsAppButton';
 import { Language } from '../types';
 
 const VALID_LANGS: Language[] = ['tr', 'en', 'de', 'ru', 'ar'];
@@ -29,7 +29,7 @@ const LocaleLayout: React.FC = () => {
       <Navbar lang={lang} setLang={setLang} />
       <Outlet context={{ lang }} />
       <Footer lang={lang} />
-      <AiAssistant lang={lang} />
+      <WhatsAppButton lang={lang} />
     </div>
   );
 };

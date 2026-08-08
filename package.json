@@ -15,7 +15,6 @@
     "prerender": "node scripts/prerender.js"
   },
   "dependencies": {
-    "@google/genai": "^1.38.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-router-dom": "^7.13.0"

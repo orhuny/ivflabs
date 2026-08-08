@@ -62,8 +62,6 @@ export interface Translation {
   heroCTA: string;
   servicesTitle: string;
   servicesSubtitle: string;
-  aiTitle: string;
-  aiPlaceholder: string;
   footerRights: string;
   blogTitle: string;
   blogSubtitle: string;
@@ -84,10 +82,6 @@ export interface BlogPost {
   faqs?: Record<Language, Array<{ q: string; a: string }>>;
 }
 
-export interface Message {
-  role: 'user' | 'model';
-  text: string;
-}
 
 export interface Doctor {
   name: string;
