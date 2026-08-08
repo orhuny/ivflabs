@@ -25,7 +25,7 @@ const LocaleLayout: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 selection:bg-primary-200 selection:text-primary-900">
+    <div className="min-h-screen life-pattern text-gray-900 selection:bg-primary-200 selection:text-primary-900">
       <Navbar lang={lang} setLang={setLang} />
       <Outlet context={{ lang }} />
       <Footer lang={lang} />

@@ -37,7 +37,7 @@ export const DOCTORS: Doctor[] = [
       ru: 'Основатель и директор - Специалист-эмбриолог',
       ar: 'المؤسسة والمديرة - أخصائية الأجنة'
     },
-    experience: '12+',
+    experience: '20+',
     image: '/doctors/fatma-tertemiz.jpg',
     specialties: {
       en: ['Embryology', 'ICSI', 'Vitrification', 'PGD/PGS', 'Laboratory Management'],

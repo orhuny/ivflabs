@@ -2,10 +2,27 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { SERVICES, TRANSLATIONS } from '../constants';
+import { findTreatmentById, treatmentPath } from '../pages/treatments';
 
 interface ServicesProps {
   lang: Language;
 }
+
+/** Homepage service card id -> treatment detail page id. */
+const SERVICE_TREATMENT_IDS: Record<string, string> = {
+  ivf: 'ivf',
+  icsi: 'icsi',
+  pgd: 'pgd-pgs',
+  'egg-freezing': 'egg-freezing',
+};
+
+const DETAILS_LABEL: Record<Language, string> = {
+  tr: 'Detaylı Bilgi',
+  en: 'Learn More',
+  de: 'Mehr erfahren',
+  ru: 'Подробнее',
+  ar: 'اعرف المزيد',
+};
 
 const Services: React.FC<ServicesProps> = ({ lang }) => {
   const t = TRANSLATIONS[lang];
@@ -18,11 +35,25 @@ const Services: React.FC<ServicesProps> = ({ lang }) => {
     'from-blue-500 to-indigo-500',
   ];
 
+  const cardTints = [
+    'from-primary-50/80',
+    'from-pink-50/80',
+    'from-orange-50/80',
+    'from-indigo-50/80',
+  ];
+
+  /** Resolve the detail page URL for a service; fall back to the treatments list. */
+  const detailHref = (serviceId: string): string => {
+    const treatment = findTreatmentById(SERVICE_TREATMENT_IDS[serviceId] ?? serviceId);
+    return treatment ? treatmentPath(lang, treatment) : `/${lang}/treatments`;
+  };
+
   return (
-    <section id="treatments" className="py-24 bg-white relative overflow-hidden">
+    <section id="treatments" className="py-24 relative overflow-hidden">
       {/* Background Decorations */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-100 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-100 rounded-full blur-3xl opacity-60 translate-y-1/2 -translate-x-1/2"></div>
+      <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-cyan-100 rounded-full blur-3xl opacity-40"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -49,16 +80,15 @@ const Services: React.FC<ServicesProps> = ({ lang }) => {
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${gradients[index]} rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl scale-90 group-hover:scale-100`}></div>
 
-              <div className="relative bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 h-full">
+              <a
+                href={detailHref(service.id)}
+                className={`relative flex flex-col bg-gradient-to-b ${cardTints[index]} to-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 h-full`}
+              >
                 {/* Icon */}
-                <div className={`relative w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 overflow-hidden ${
-                  hoveredIndex === index
-                    ? `bg-gradient-to-br ${gradients[index]}`
-                    : 'bg-gray-100'
+                <div className={`relative w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 overflow-hidden bg-gradient-to-br ${gradients[index]} shadow-lg ${
+                  hoveredIndex === index ? 'scale-110 rotate-3' : ''
                 }`}>
-                  <i className={`fas ${service.icon} text-2xl transition-colors duration-500 ${
-                    hoveredIndex === index ? 'text-white' : 'text-gray-600'
-                  }`}></i>
+                  <i className={`fas ${service.icon} text-2xl text-white`}></i>
                   <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
 
@@ -70,20 +100,17 @@ const Services: React.FC<ServicesProps> = ({ lang }) => {
                   {service.description[lang]}
                 </p>
 
-                {/* Learn More Link - goes to full treatments page */}
-                <a
-                  href={`/${lang}/treatments`}
-                  className="inline-flex items-center text-sm font-semibold text-primary-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0"
-                >
-                  {lang === 'tr' ? 'Detaylı Bilgi' : 'Learn More'}
+                {/* Learn More Link - goes to this treatment's detail page */}
+                <span className="mt-auto inline-flex items-center text-sm font-semibold text-primary-600 group-hover:text-primary-700 transition-colors">
+                  {DETAILS_LABEL[lang]}
                   <i className="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                </a>
+                </span>
 
                 {/* Decorative Number */}
-                <div className="absolute top-6 right-6 text-7xl font-bold text-gray-100 group-hover:text-primary-100 transition-colors pointer-events-none">
+                <div className="absolute top-6 right-6 text-7xl font-bold text-gray-100/80 group-hover:text-primary-100 transition-colors pointer-events-none">
                   {String(index + 1).padStart(2, '0')}
                 </div>
-              </div>
+              </a>
             </div>
           ))}
         </div>

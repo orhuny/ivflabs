@@ -61,7 +61,7 @@ const TreatmentsPage: React.FC = () => {
   };
 
   return (
-    <section className="pt-32 pb-24 bg-gray-50 min-h-screen">
+    <section className="pt-32 pb-24 min-h-screen">
       <SEO
         title={seoTitle}
         description={seoDescription}

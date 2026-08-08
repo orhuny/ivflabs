@@ -56,7 +56,7 @@ const AboutPage: React.FC = () => {
   };
 
   return (
-    <main className="pt-32 pb-24 bg-white min-h-screen">
+    <main className="pt-32 pb-24 min-h-screen">
       <SEO title={seoTitle} description={seoDescription} lang={lang} />
       <div className="container mx-auto px-6">
         <Link
@@ -132,7 +132,7 @@ const AboutPage: React.FC = () => {
         </section>
 
         {/* Our Team Section */}
-        <section className="py-24 bg-gray-50 rounded-3xl">
+        <section className="py-24 bg-gray-50/70 rounded-3xl">
           <div className="container mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="inline-block px-4 py-1.5 bg-primary-100 text-primary-600 text-sm font-semibold rounded-full mb-4">

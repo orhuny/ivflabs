@@ -131,7 +131,7 @@ const TreatmentDetailPage: React.FC = () => {
     .filter((t): t is Treatment => Boolean(t));
 
   return (
-    <article className="pt-32 pb-24 bg-gray-50 min-h-screen">
+    <article className="pt-32 pb-24 min-h-screen">
       <SEO
         title={seoTitle}
         description={seoDescription}

@@ -20,7 +20,7 @@ export const AI_ASSISTANT_KNOWLEDGE = `
 
 ### Team (key figures)
 - Op. Dr. Şevket Alptürk: Founder & Clinical Director, Operating Gynecologist. 30+ years of experience. Specialist in IVF, ICSI, gynecology, obstetrics, infertility treatment.
-- Spec. Emb. Fatma Tertemiz (MSc): Founder & Director, Specialist Embryologist. 12+ years. Director of Doğuş ART Center and Embryology & Andrology Laboratories. Expertise: embryology, ICSI, vitrification, PGD/PGS, laboratory management.
+- Spec. Emb. Fatma Tertemiz (MSc): Founder & Director, Specialist Embryologist. 20+ years. Director of Doğuş ART Center and Embryology & Andrology Laboratories. Expertise: embryology, ICSI, vitrification, PGD/PGS, laboratory management.
 
 ### Treatments offered (with approximate success rates and duration)
 1. **IVF (In Vitro Fertilization)** – Lab fertilization of eggs and sperm. ~20 days. Success rate ~65%. Steps: medication, ovarian stimulation (10–14 days), egg retrieval (OPU), sperm preparation, fertilization (ICSI/IVF), embryo culture (3–5 days), embryo transfer, pregnancy test (~12 days).
@@ -83,7 +83,7 @@ Q: Do you treat international patients?
 A: Yes. The center welcomes international patients. North Cyprus has favourable laws for egg/sperm/embryo donation, and many patients come from abroad. Costs are often more affordable than in many European countries.
 
 Q: Who are the doctors?
-A: Op. Dr. Şevket Alptürk (Founder, Clinical Director, Gynecologist, 30+ years) and Spec. Emb. Fatma Tertemiz (Founder, Director, Specialist Embryologist, 12+ years). They lead the ART center and embryology/andrology labs.
+A: Op. Dr. Şevket Alptürk (Founder, Clinical Director, Gynecologist, 30+ years) and Spec. Emb. Fatma Tertemiz (Founder, Director, Specialist Embryologist, 20+ years). They lead the ART center and embryology/andrology labs.
 
 Q: What is PGD/PGS?
 A: Genetic testing of embryos before transfer. PGD/PGS helps select embryos without certain genetic conditions and can improve the chance of a healthy pregnancy. At Doğuş the process is about 25 days with success rate around 75%.

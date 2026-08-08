@@ -53,14 +53,15 @@ const Hero: React.FC<HeroProps> = ({ lang }) => {
         />
         {/* Tema rengiyle koyulaştırma: cyan/blue geçiş */}
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/50 via-blue-900/45 to-sky-900/40 pointer-events-none" aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/78 via-blue-900/72 to-sky-900/68"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/75 via-blue-900/65 to-rose-900/55"></div>
         {/* Mobilde arka planı yumuşatmak için ek overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-cyan-900/55 via-transparent to-cyan-900/40 pointer-events-none md:hidden"></div>
 
         {/* Animated Gradient Orbs */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-400/30 rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sky-400/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-400/25 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
         <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+        <div className="absolute top-10 right-10 w-72 h-72 bg-rose-300/15 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
       </div>
 
       {/* Grid Pattern Overlay */}

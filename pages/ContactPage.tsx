@@ -28,9 +28,9 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen">
       <SEO title={seoTitle} description={seoDescription} lang={lang} />
-      <div className="pt-32 pb-12 bg-white">
+      <div className="pt-32 pb-12">
         <div className="container mx-auto px-6">
           <Link
             to={`/${lang}`}

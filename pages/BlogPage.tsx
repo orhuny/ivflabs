@@ -247,7 +247,7 @@ const BlogPage: React.FC = () => {
   const jsonLd = [buildBlogListingJsonLd(lang), buildBreadcrumbJsonLd(lang)];
 
   return (
-    <section className="pt-32 pb-24 bg-white min-h-screen">
+    <section className="pt-32 pb-24 min-h-screen">
       <SEO
         title={seoTitle}
         description={seoDescription}
