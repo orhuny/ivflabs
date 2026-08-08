@@ -87,7 +87,7 @@ const Home: React.FC = () => {
               '/images/mother&baby at the beach.jpg',
             ].map((img, idx) => (
               <div key={idx} className="relative shrink-0 w-64 h-80 rounded-3xl overflow-hidden group">
-                <img src={img} alt={`Happy family ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={img} alt={`Happy family ${idx + 1}`} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="absolute bottom-4 left-4 right-4 text-white">
                     <i className="fas fa-heart text-pink-400 mb-2"></i>

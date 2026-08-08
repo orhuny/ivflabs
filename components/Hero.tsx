@@ -100,15 +100,15 @@ const Hero: React.FC<HeroProps> = ({ lang }) => {
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-white leading-[1.15] mb-4 sm:mb-6">
               {lang === 'tr' ? (
                 <>
-                  Embriyoloji ve<br />
-                  <span className="gradient-text">Doğurganlıkta</span><br />
-                  Mükemmeliyet
+                  Kıbrıs'ta<br />
+                  <span className="gradient-text">Tüp Bebek</span> ve<br />
+                  Doğurganlıkta Mükemmeliyet
                 </>
               ) : (
                 <>
                   Excellence in<br />
-                  <span className="gradient-text">Embryology</span><br />
-                  & Fertility
+                  <span className="gradient-text">IVF</span> & Fertility<br />
+                  in Cyprus
                 </>
               )}
             </h1>

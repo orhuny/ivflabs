@@ -7,10 +7,11 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
+import { join, dirname, relative } from 'path';
 import { fileURLToPath } from 'url';
 import { register } from 'node:module';
 import { pathToFileURL } from 'node:url';
+import { execSync } from 'node:child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -20,8 +21,24 @@ const DATA_DIR = join(ROOT, 'data');
 const BASE_URL = 'https://dogusivf.net';
 const LANGS = ['tr', 'en', 'de', 'ru', 'ar'];
 
+// Last-modified date (YYYY-MM-DD) of a file according to git history.
+// Falls back to today when the file has no committed history yet.
+function gitLastMod(file) {
+  try {
+    const rel = relative(ROOT, file).replace(/\\/g, '/');
+    const cmd = rel
+      ? `git log -1 --format=%cI -- "${rel}"`
+      : 'git log -1 --format=%cI';
+    const out = execSync(cmd, { cwd: ROOT, encoding: 'utf8' }).trim();
+    if (out) return out.slice(0, 10);
+  } catch {
+    // ignore — fall through to today
+  }
+  return new Date().toISOString().slice(0, 10);
+}
+
 // Blog posts are defined inline in constants.tsx as a single array. We
-// extract their ids with a simple regex — same idea as treatments below.
+// extract their ids and dates with a simple regex — same idea as treatments below.
 function loadBlogPosts() {
   const file = join(ROOT, 'constants.tsx');
   const src = readFileSync(file, 'utf8');
@@ -29,14 +46,14 @@ function loadBlogPosts() {
   const blogStart = src.indexOf('export const BLOG_POSTS');
   if (blogStart < 0) return [];
   const blogSrc = src.slice(blogStart);
-  const matches = [...blogSrc.matchAll(/\bid:\s*'([a-z0-9-]+)'/g)];
-  // Each post has 1 id; drop duplicates just in case.
+  // Pair each post id with the date that follows it in the same object.
+  const matches = [...blogSrc.matchAll(/\bid:\s*'([a-z0-9-]+)'[\s\S]*?\bdate:\s*'(\d{4}-\d{2}-\d{2})'/g)];
   const seen = new Set();
   const posts = [];
   for (const m of matches) {
     if (seen.has(m[1])) continue;
     seen.add(m[1]);
-    posts.push({ id: m[1] });
+    posts.push({ id: m[1], lastmod: m[2] });
   }
   return posts;
 }
@@ -102,13 +119,14 @@ function buildUrls(treatments, blogPosts) {
   return urls;
 }
 
-function urlElementWithHreflang(url, alternates) {
+function urlElementWithHreflang(url, alternates, lastmod) {
   const altLines = alternates
     .map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" href="${escapeXml(a.url)}"/>`)
     .join('\n');
   const xDefault = alternates.find((a) => a.lang === 'en') ?? alternates[0];
+  const lastmodLine = lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : '';
   return `  <url>
-    <loc>${escapeXml(url)}</loc>
+    <loc>${escapeXml(url)}</loc>${lastmodLine}
     <changefreq>weekly</changefreq>
 ${altLines}
     <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(xDefault.url)}"/>
@@ -131,19 +149,23 @@ function main() {
 
   // Build hreflang groups: every URL gets its 5-language alternates.
   const sections = [];
+  // Static pages change whenever the app content changes — use the repo's
+  // latest commit date as their lastmod.
+  const repoLastMod = gitLastMod(ROOT);
   // 1) Static pages, grouped per page across languages
   const staticPages = ['', '/treatments', '/about', '/contact', '/blog'];
   for (const path of staticPages) {
     const alternates = LANGS.map((lang) => ({ lang, url: `${BASE_URL}/${lang}${path}` }));
-    for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates));
+    for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates, repoLastMod));
   }
   // 2) Treatment pages, grouped per treatment across languages
   for (const t of treatments) {
+    const lastmod = gitLastMod(t.file);
     const alternates = LANGS.filter((l) => t.slug[l]).map((lang) => ({
       lang,
       url: `${BASE_URL}/${lang}/treatments/${t.slug[lang]}`,
     }));
-    for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates));
+    for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates, lastmod));
   }
   // 3) Blog post pages, grouped per post across languages
   for (const post of blogPosts) {
@@ -151,7 +173,7 @@ function main() {
       lang,
       url: `${BASE_URL}/${lang}/blog/${post.id}`,
     }));
-    for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates));
+    for (const a of alternates) sections.push(urlElementWithHreflang(a.url, alternates, post.lastmod));
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

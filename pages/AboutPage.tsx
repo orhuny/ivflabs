@@ -82,12 +82,12 @@ const AboutPage: React.FC = () => {
             <div className="relative">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
-                  <img src="/images/baby_photo1.jpg" alt="Hospital" className="rounded-2xl shadow-lg w-full h-48 object-cover" />
-                  <img src="/images/baby_photo2.jpg" alt="Laboratory" className="rounded-2xl shadow-lg w-full h-64 object-cover" />
+                  <img src="/images/baby_photo1.jpg" alt="Hospital" loading="lazy" className="rounded-2xl shadow-lg w-full h-48 object-cover" />
+                  <img src="/images/baby_photo2.jpg" alt="Laboratory" loading="lazy" className="rounded-2xl shadow-lg w-full h-64 object-cover" />
                 </div>
                 <div className="space-y-4 pt-8">
-                  <img src="/images/baby_photo3.jpg" alt="Equipment" className="rounded-2xl shadow-lg w-full h-64 object-cover" />
-                  <img src="/images/Happy-Baby-Kissing-Happy-Mother_edited.jpg" alt="Consultation" className="rounded-2xl shadow-lg w-full h-48 object-cover" />
+                  <img src="/images/baby_photo3.jpg" alt="Equipment" loading="lazy" className="rounded-2xl shadow-lg w-full h-64 object-cover" />
+                  <img src="/images/Happy-Baby-Kissing-Happy-Mother_edited.jpg" alt="Consultation" loading="lazy" className="rounded-2xl shadow-lg w-full h-48 object-cover" />
                 </div>
               </div>
               <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl p-6 flex items-center gap-8">
@@ -150,6 +150,7 @@ const AboutPage: React.FC = () => {
                     <img
                       src={doctor.image}
                       alt={doctor.name}
+                      loading="lazy"
                       className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
