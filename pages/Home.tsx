@@ -151,7 +151,7 @@ const Home: React.FC = () => {
   const { lang } = useOutletContext<{ lang: Language }>();
   const t = TRANSLATIONS[lang];
 
-  const seoTitle = { tr: 'Doğuş IVF Center | Tüp Bebek Merkezi', en: 'Doğuş IVF Center | IVF & Fertility Cyprus', de: 'Doğuş IVF Center | IVF Zypern', ru: 'Doğuş IVF Center | ЭКО Кипр', ar: 'Doğuş IVF Center | أطفال الأنابيب قبرص' }[lang];
+  const seoTitle = { tr: 'Doğuş Tüp Bebek Merkezi | Kıbrıs Tüp Bebek ve IVF', en: 'Doğuş IVF Center | IVF & Fertility Cyprus', de: 'Doğuş IVF Center | IVF Zypern', ru: 'Doğuş IVF Center | ЭКО Кипр', ar: 'Doğuş IVF Center | أطفال الأنابيب قبرص' }[lang];
   const seoDescription = { tr: 'Doğuş Tüp Bebek Merkezi - Kuzey Kıbrıs\'ın güvenilir IVF merkezi. 25+ yıllık deneyim ile doğurganlık tedavileri.', en: 'Doğuş IVF Center - Premier fertility clinic in North Cyprus. IVF, egg donation, ICSI and more. 25+ years experience.', de: 'Doğuş IVF Center - Führende Kinderwunschklinik in Nordzypern.', ru: 'Doğuş IVF Center - Клиника ЭКО в Северном Кипре.', ar: 'Doğuş IVF Center - عيادة الخصوبة في قبرص الشمالية.' }[lang];
 
   return (
