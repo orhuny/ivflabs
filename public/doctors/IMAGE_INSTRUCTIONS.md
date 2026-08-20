@@ -4,12 +4,7 @@
 
 Aşağıdaki dosyaları `public/doctors/` klasörüne eklemeniz gerekmektedir:
 
-1. **fatma-tertemiz.jpg** - Fatma Tertemiz'in fotoğrafı
-   - Blonde saçlı, mavi/yeşil gözlü, 40-50 yaşlarında
-   - Mavi V-yaka tıbbi önlük giymiş
-   - Doğuş logosu görünüyor
-
-2. **dr-sevket-alpturk.jpg** - Dr. Şevket Alptürk'ün fotoğrafı
+1. **dr-sevket-alpturk.jpg** - Dr. Şevket Alptürk'ün fotoğrafı
    - Tuz-biber saçlı, bıyıklı, 50-60 yaşlarında
    - Açık mavi tıbbi önlük giymiş
    - Masasında kitaplar ve ödüller görünüyor
@@ -30,7 +25,6 @@ Aşağıdaki dosyaları `public/doctors/` klasörüne eklemeniz gerekmektedir:
 ## Mevcut Durum
 
 Kod zaten bu görüntülere referans veriyor:
-- `/doctors/fatma-tertemiz.jpg`
 - `/doctors/dr-sevket-alpturk.jpg`
 
 Dosyaları ekledikten sonra görüntüler otomatik olarak "Uzman Kadromuz" bölümünde görünecektir.

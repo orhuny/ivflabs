@@ -33,21 +33,21 @@ const TESTIMONIALS: Array<{ name: string; text: Record<Language, string> }> = [
   {
     name: 'Edward',
     text: {
-      tr: 'İki başarısız tüp bebek denemesinden sonra Kıbrıs\'ta Doğuş Hastanesi\'ni seçtik. Fatma Hanım her aşamada yanımızdaydı — şimdi ikizlerimiz Olivia ve Valerie ile birlikteyiz.',
-      en: 'After two unsuccessful IVF treatments we chose Doğuş Hospital in Cyprus. Fatma helped us at every stage — now we have our twins, Olivia & Valerie. Thank you Fatma, thank you Dr Şevket, thank you Doğuş.',
-      de: 'Nach zwei erfolglosen IVF-Behandlungen entschieden wir uns für das Doğuş-Krankenhaus auf Zypern. Fatma half uns in jeder Phase — jetzt haben wir unsere Zwillinge Olivia & Valerie.',
-      ru: 'После двух неудачных попыток ЭКО мы выбрали больницу Doğuş на Кипре. Фатма помогала нам на каждом этапе — теперь у нас двойняшки, Оливия и Валери.',
-      ar: 'بعد محاولتي أطفال أنابيب فاشلتين اخترنا مستشفى Doğuş في قبرص. ساعدتنا فاطمة في كل مرحلة — والآن لدينا توأمانا أوليفيا وفاليري.'
+      tr: 'İki başarısız tüp bebek denemesinden sonra Kıbrıs\'ta Doğuş Hastanesi\'ni seçtik. Ekip her aşamada yanımızdaydı — şimdi ikizlerimiz Olivia ve Valerie ile birlikteyiz.',
+      en: 'After two unsuccessful IVF treatments we chose Doğuş Hospital in Cyprus. The team helped us at every stage — now we have our twins, Olivia & Valerie. Thank you Dr Şevket, thank you Doğuş.',
+      de: 'Nach zwei erfolglosen IVF-Behandlungen entschieden wir uns für das Doğuş-Krankenhaus auf Zypern. Das Team half uns in jeder Phase — jetzt haben wir unsere Zwillinge Olivia & Valerie.',
+      ru: 'После двух неудачных попыток ЭКО мы выбрали больницу Doğuş на Кипре. Команда помогала нам на каждом этапе — теперь у нас двойняшки, Оливия и Валери.',
+      ar: 'بعد محاولتي أطفال أنابيب فاشلتين اخترنا مستشفى Doğuş في قبرص. ساعدنا الفريق في كل مرحلة — والآن لدينا توأمانا أوليفيا وفاليري.'
     }
   },
   {
     name: 'Jacqueline C.',
     text: {
-      tr: 'Geçen yıl iki haftalığına Kıbrıs\'a geldik. Hayallerimiz gerçek oldu — ikiz oğullarımız oldu ve ikisi de sapasağlam. Uzman embriyoloğumuz Fatma\'ya, Dr. Şevket\'e ve tüm hastane ekibine sevgilerimizi yolluyoruz.',
-      en: 'Last year we went to Cyprus for two weeks. Our dreams came true — we have our twin boys and they are very healthy. We send our love to our embryologist Fatma, Dr Şevket and all the hospital staff.',
-      de: 'Letztes Jahr waren wir für zwei Wochen auf Zypern. Unsere Träume wurden wahr — wir haben unsere Zwillingsjungen und sie sind kerngesund. Liebe Grüße an unsere Embryologin Fatma, Dr. Şevket und das gesamte Team.',
-      ru: 'В прошлом году мы приехали на Кипр на две недели. Наши мечты сбылись — у нас родились близнецы-мальчики, и оба совершенно здоровы. Шлём любовь эмбриологу Фатме, доктору Шевкету и всей команде.',
-      ar: 'العام الماضي ذهبنا إلى قبرص لمدة أسبوعين. تحققت أحلامنا — رُزقنا بتوأمين ذكرين وكلاهما بصحة ممتازة. نرسل حبنا لأخصائية الأجنة فاطمة وللدكتور شوكت ولكل فريق المستشفى.'
+      tr: 'Geçen yıl iki haftalığına Kıbrıs\'a geldik. Hayallerimiz gerçek oldu — ikiz oğullarımız oldu ve ikisi de sapasağlam. Dr. Şevket\'e ve tüm hastane ekibine sevgilerimizi yolluyoruz.',
+      en: 'Last year we went to Cyprus for two weeks. Our dreams came true — we have our twin boys and they are very healthy. We send our love to Dr Şevket and all the hospital staff.',
+      de: 'Letztes Jahr waren wir für zwei Wochen auf Zypern. Unsere Träume wurden wahr — wir haben unsere Zwillingsjungen und sie sind kerngesund. Liebe Grüße an Dr. Şevket und das gesamte Team.',
+      ru: 'В прошлом году мы приехали на Кипр на две недели. Наши мечты сбылись — у нас родились близнецы-мальчики, и оба совершенно здоровы. Шлём любовь доктору Шевкету и всей команде.',
+      ar: 'العام الماضي ذهبنا إلى قبرص لمدة أسبوعين. تحققت أحلامنا — رُزقنا بتوأمين ذكرين وكلاهما بصحة ممتازة. نرسل حبنا للدكتور شوكت ولكل فريق المستشفى.'
     }
   }
 ];
@@ -61,22 +61,7 @@ const GALLERY_IMAGES = [
   '/images/mother&baby at the beach.jpg',
 ];
 
-/** Ana sayfada öne çıkarılan kurucu — Fatma Tertemiz. */
-const FOUNDER = DOCTORS.find((d) => d.name.includes('Fatma'));
-
 const HOME_SECTION_COPY = {
-  founderTag: { tr: 'Kurucumuz', en: 'Our Founder', de: 'Unsere Gründerin', ru: 'Наш основатель', ar: 'مؤسِّستنا' },
-  founderCta: { tr: 'Yakından Tanıyın', en: 'Get to Know Her', de: 'Mehr erfahren', ru: 'Узнать больше', ar: 'تعرف عليها' },
-  founderContactCta: { tr: 'Randevu Alın', en: 'Book a Consultation', de: 'Termin vereinbaren', ru: 'Записаться', ar: 'احجز موعدًا' },
-  specialtiesLabel: { tr: 'Uzmanlık Alanları', en: 'Areas of Expertise', de: 'Fachgebiete', ru: 'Специализации', ar: 'مجالات الخبرة' },
-  founderVideoTag: { tr: 'Söyleşi', en: 'Interview', de: 'Interview', ru: 'Интервью', ar: 'مقابلة' },
-  founderVideoTitle: {
-    tr: 'Fatma Tertemiz ile Söyleşi',
-    en: 'An Interview with Fatma Tertemiz',
-    de: 'Interview mit Fatma Tertemiz',
-    ru: 'Интервью с Фатмой Тертемиз',
-    ar: 'مقابلة مع فاطمة ترتميز'
-  },
   teamTag: { tr: 'Uzman Kadro', en: 'Expert Team', de: 'Expertenteam', ru: 'Команда экспертов', ar: 'فريق متخصص' },
   teamTitle: { tr: 'Ekibimizle Tanışın', en: 'Meet Our Team', de: 'Lernen Sie unser Team kennen', ru: 'Познакомьтесь с нашей командой', ar: 'تعرفوا على فريقنا' },
   teamSubtitle: {
@@ -159,99 +144,6 @@ const Home: React.FC = () => {
       <SEO title={seoTitle} description={seoDescription} lang={lang} image="/images/ivf-centre-babies.jpg" jsonLd={[buildClinicJsonLd(lang, seoDescription)]} />
       <Hero lang={lang} />
 
-      {/* Kurucumuz — Fatma Tertemiz: solda fotoğraf, sağda özgeçmiş */}
-      {FOUNDER && (
-        <section className="py-24 bg-gradient-to-b from-cyan-50/50 via-transparent to-transparent overflow-hidden">
-          <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-6xl mx-auto">
-              {/* Sol: Fotoğraf */}
-              <div className="relative max-w-md w-full mx-auto lg:mx-0">
-                <div className="absolute -inset-5 bg-gradient-to-br from-cyan-400/30 via-sky-300/20 to-pink-400/25 rounded-[2.75rem] blur-2xl" aria-hidden></div>
-                <div className="relative rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl">
-                  <img
-                    src={FOUNDER.image}
-                    alt={FOUNDER.name}
-                    loading="lazy"
-                    className="w-full h-[26rem] md:h-[30rem] object-cover object-top"
-                  />
-                </div>
-                <div className="absolute -bottom-6 -right-3 lg:-right-8 bg-white rounded-2xl shadow-xl px-5 py-4 flex items-center gap-3 border border-cyan-100">
-                  <div className="w-11 h-11 shrink-0 bg-gradient-to-br from-cyan-400 to-pink-400 rounded-xl flex items-center justify-center">
-                    <i className="fas fa-award text-white"></i>
-                  </div>
-                  <div>
-                    <div className="text-lg font-bold text-gray-900 leading-tight">{FOUNDER.experience}</div>
-                    <div className="text-xs text-gray-500 uppercase tracking-wider">{HOME_SECTION_COPY.yearsLabel[lang]}</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Sağ: Özgeçmiş */}
-              <div className="text-center lg:text-start">
-                <span className="inline-block px-4 py-1.5 bg-cyan-100 text-cyan-600 text-sm font-semibold rounded-full mb-4">
-                  {HOME_SECTION_COPY.founderTag[lang]}
-                </span>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-900 mb-2">
-                  {FOUNDER.name}
-                </h2>
-                <p className="text-cyan-600 font-semibold mb-6">{FOUNDER.title[lang]}</p>
-                <p className="text-gray-600 text-lg leading-relaxed mb-8">{FOUNDER.bio[lang]}</p>
-
-                <p className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3">
-                  {HOME_SECTION_COPY.specialtiesLabel[lang]}
-                </p>
-                <div className="flex flex-wrap justify-center lg:justify-start gap-2 mb-10">
-                  {FOUNDER.specialties[lang].map((s, i) => (
-                    <span key={i} className="px-4 py-1.5 bg-white border border-cyan-200 text-cyan-700 text-sm font-medium rounded-full shadow-sm">
-                      {s}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                  <a
-                    href={`/${lang}/about`}
-                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300 hover:scale-105"
-                  >
-                    {HOME_SECTION_COPY.founderCta[lang]}
-                    <i className="fas fa-arrow-right ms-3"></i>
-                  </a>
-                  <a
-                    href={`/${lang}/contact`}
-                    className="inline-flex items-center px-6 py-3 bg-white border border-cyan-200 text-cyan-700 font-semibold rounded-xl hover:bg-cyan-50 transition-colors"
-                  >
-                    {HOME_SECTION_COPY.founderContactCta[lang]}
-                    <i className="fas fa-calendar-check ms-3"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Fatma Hanım ile yapılan YouTube söyleşisi */}
-            <div className="mt-20 max-w-4xl mx-auto">
-              <div className="text-center mb-8">
-                <span className="inline-block px-4 py-1.5 bg-pink-100 text-pink-600 text-sm font-semibold rounded-full mb-4">
-                  {HOME_SECTION_COPY.founderVideoTag[lang]}
-                </span>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-gray-900">
-                  {HOME_SECTION_COPY.founderVideoTitle[lang]}
-                </h3>
-              </div>
-              <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/PXNtgSZS6gs"
-                  title={HOME_SECTION_COPY.founderVideoTitle[lang]}
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full"
-                ></iframe>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Happy Families Gallery — kenar fade'li, otomatik kayan galeri (hover'da durur) */}
       <section className="py-16 overflow-hidden">
         <div className="container mx-auto px-6">
@@ -301,7 +193,7 @@ const Home: React.FC = () => {
             </h2>
             <p className="text-gray-600 text-lg">{HOME_SECTION_COPY.teamSubtitle[lang]}</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {DOCTORS.map((doctor, idx) => (
               <a
                 key={idx}

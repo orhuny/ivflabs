@@ -5,7 +5,7 @@ This is the renovated website for **Doğuş IVF Center** (www.cyprusivflabs.com)
 ## Features
 
 - 🌍 **Multi-language Support**: English, Turkish, German, Russian, and Arabic
-- 👨‍⚕️ **Doctor Profiles**: Detailed information about Dr. Şevket Alptürk and Fatma Tertemiz
+- 👨‍⚕️ **Doctor Profiles**: Detailed information about Dr. Şevket Alptürk
 - 🏥 **Comprehensive Services**: IVF, ICSI, PGD, Egg/Sperm/Embryo Donation, and more
 - 📱 **Responsive Design**: Modern, mobile-friendly interface
 - 🤖 **AI Assistant**: Integrated fertility AI assistant powered by Gemini
@@ -24,9 +24,8 @@ All content has been updated to match the original www.cyprusivflabs.com website
 
 **Important**: Doctor photos need to be added to display properly.
 
-1. Download photos of **Fatma Tertemiz** and **Şevket Alptürk** from the original website
+1. Download photos of **Şevket Alptürk** from the original website
 2. Place them in `public/doctors/` folder:
-   - `fatma-tertemiz.jpg`
    - `dr-sevket-alpturk.jpg`
 3. See `public/doctors/README.md` for detailed instructions
 

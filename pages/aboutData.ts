@@ -27,32 +27,6 @@ export const DOCTORS: Doctor[] = [
       ru: 'Родился в 1959 году в Никосии, Северный Кипр. После завершения бакалавриата на медицинском факультете Анкарского университета, в 1989 году он успешно получил звание специалиста-врача от того же университета, кафедры акушерства и гинекологии.',
       ar: 'ولد عام 1959 في نيقوسيا، شمال قبرص. بعد إكمال دراسته الجامعية في كلية الطب بجامعة أنقرة، حصل بنجاح على لقب طبيب أخصائي من نفس الجامعة، قسم التوليد وأمراض النساء في عام 1989.'
     }
-  },
-  {
-    name: 'Spec. Emb. Fatma Tertemiz (MSc)',
-    title: {
-      en: 'Founder & Director - Specialist Embryologist',
-      tr: 'Kurucu & Direktör - Uzman Embriyolog',
-      de: 'Gründerin & Direktorin - Spezialisierte Embryologin',
-      ru: 'Основатель и директор - Специалист-эмбриолог',
-      ar: 'المؤسسة والمديرة - أخصائية الأجنة'
-    },
-    experience: '20+',
-    image: '/doctors/fatma-tertemiz.jpg',
-    specialties: {
-      en: ['Embryology', 'ICSI', 'Vitrification', 'PGD/PGS', 'Laboratory Management'],
-      tr: ['Embriyoloji', 'ICSI', 'Vitrifikasyon', 'PGD/PGS', 'Laboratuvar Yönetimi'],
-      de: ['Embryologie', 'ICSI', 'Vitrifikation', 'PGD/PGS', 'Laborverwaltung'],
-      ru: ['Эмбриология', 'ИКСИ', 'Витрификация', 'ПГД/ПГС', 'Управление лабораторией'],
-      ar: ['علم الأجنة', 'الحقن المجهري', 'التزجيج', 'PGD/PGS', 'إدارة المختبر']
-    },
-    bio: {
-      en: 'Born in 1980 in Gazi Magosa (Famagusta), North Cyprus. Director of Doğuş ART (Assisted Reproductive Techniques) Center and Director of Doğuş Hospital Embryology and Andrology Laboratories. Successfully graduated from Akdeniz University Faculty of Medicine, Department of Histology-Embryology and received the Master of Science degree.',
-      tr: '1980 yılında Gazi Magosa\'da dünyaya gelmiştir. Doğuş ÜYTE Kurucusu ve Direktörü, Doğuş Hastanesi Embriyoloji ve Androloji Laboratuvarları\'mızın Direktörü. Akdeniz Üniversitesi Tıp Fakültesi Histoloji-Embriyoloji Anabilim Dalı\'ndan başarıyla mezun olup Bilim Uzmanı Ünvanını almıştır.',
-      de: 'Geboren 1980 in Gazi Magosa (Famagusta), Nordzypern. Direktorin des Doğuş ART (Assistierte Reproduktionstechniken) Zentrums und Direktorin der Embryologie- und Andrologielabors des Doğuş Krankenhauses.',
-      ru: 'Родилась в 1980 году в Гази Магосе (Фамагуста), Северный Кипр. Директор центра Doğuş ART (Вспомогательные репродуктивные технологии) и директор лабораторий эмбриологии и андрологии больницы Doğuş.',
-      ar: 'ولدت عام 1980 في غازي مغوسا (فاماغوستا)، شمال قبرص. مديرة مركز Doğuş ART (تقنيات الإنجاب المساعدة) ومديرة مختبرات علم الأجنة والذكورة في مستشفى Doğuş.'
-    }
   }
 ];
 

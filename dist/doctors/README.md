@@ -10,10 +10,6 @@ Please place the following images in this folder:
    - Operating Gynecologist, Founder & Clinical Director
    - Born 1959 in Nicosia, North Cyprus
 
-2. **`fatma-tertemiz.jpg`** - Photo of Fatma Tertemiz (MSc)
-   - Specialist Embryologist, Founder & Director
-   - Born 1980 in Famagusta, North Cyprus
-
 ## Image Requirements
 
 - **Format**: JPG or PNG
